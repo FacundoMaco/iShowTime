@@ -1,0 +1,278 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f4f7f6; /* Un gris muy claro para el fondo general si es necesario */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Encabezado */
+.site-header {
+    background-color: #ffffff; /* Fondo blanco para el header como en la imagen */
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-circle {
+    background-color: #2c3e50; /* Azul oscuro del logo ST */
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2c3e50; /* Azul oscuro del texto ShowTime */
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav li {
+    margin-left: 25px;
+}
+
+.main-nav a {
+    color: #333;
+    font-weight: 500;
+}
+
+.main-nav a:hover {
+    color: #007bff; /* Un color para el hover */
+}
+
+.auth-buttons .login-btn {
+    background-color: transparent;
+    border: 1px solid #ccc; /* Borde gris claro */
+    color: #333;
+    margin-right: 10px;
+}
+
+.auth-buttons .signup-btn {
+    background-color: #2c3e50; /* Azul oscuro del botón Crear Cuenta */
+    color: white;
+}
+
+/* Sección Hero */
+.hero-section {
+    background-color: #4a7c82; /* Color verdoso oscuro del hero */
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero-section h1 {
+    font-size: 2.8em;
+    margin-bottom: 15px;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.explore-events-btn {
+    background-color: #82c5c5; /* Azul claro del botón */
+    color: #2c3e50; /* Texto oscuro */
+    padding: 15px 35px;
+    font-size: 1.1em;
+    border-radius: 8px;
+}
+
+/* Categorías Populares */
+.popular-categories {
+    padding: 60px 5%;
+    text-align: center;
+    background-color: #ffffff; /* Fondo blanco para esta sección */
+}
+
+.popular-categories h2 {
+    font-size: 2em;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+.categories-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.category-item {
+    margin: 20px;
+    width: 150px; /* Ancho fijo para cada categoría */
+}
+
+.category-icon-bg {
+    background-color: #b2d8d8; /* Azul verdoso claro para el fondo del ícono */
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px auto;
+    font-size: 2em; /* Tamaño para el texto del ícono placeholder */
+    color: #2c3e50; /* Color para el texto del ícono placeholder */
+}
+
+.category-item p {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Sección CTA (Call to Action) */
+.cta-section {
+    background-color: #e0f2f7; /* Azul muy claro para el fondo */
+    padding: 50px 5%;
+    margin: 40px auto; /* Margen superior e inferior */
+    max-width: 800px; /* Ancho máximo para el contenedor */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.cta-content {
+    text-align: center;
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+}
+
+.cta-content h2 {
+    font-size: 1.8em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.cta-content p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+.cta-content p:last-of-type {
+    margin-bottom: 30px;
+}
+
+
+.view-events-btn {
+    background-color: #82c5c5; /* Mismo color que el botón de explorar eventos */
+    color: #2c3e50;
+    padding: 15px 35px;
+    font-size: 1.1em;
+    border-radius: 8px;
+}
+
+/* Pie de página */
+.site-footer-bottom {
+    background-color: #0a0a23; /* Azul muy oscuro del footer */
+    color: #f0f0f0; /* Texto claro */
+    padding: 40px 5%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.site-footer-bottom h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.site-footer-bottom ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.site-footer-bottom li {
+    margin-bottom: 8px;
+}
+
+.site-footer-bottom a {
+    color: #c0c0c0; /* Gris claro para los enlaces */
+}
+
+.site-footer-bottom a:hover {
+    color: #82c5c5; /* Color de hover */
+}
+
+.footer-links, .social-media, .contact-info {
+    flex: 1;
+    min-width: 200px; /* Para que no se encojan demasiado */
+    margin: 10px;
+}
+
+.contact-info p {
+    margin-bottom: 8px;
+    font-size: 0.9em;
+}
+
+/* Media Queries para responsividad (ejemplo básico) */
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column;
+        padding: 15px 3%;
+    }
+    .main-nav ul {
+        margin-top: 15px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .main-nav li {
+        margin: 10px 0;
+    }
+    .auth-buttons {
+        margin-top: 15px;
+    }
+    .hero-section h1 {
+        font-size: 2em;
+    }
+    .categories-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .site-footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-links, .social-media, .contact-info {
+        margin-bottom: 30px;
+        width: 100%;
+    }
+}
