@@ -1,10 +1,11 @@
-/* Estilos generales */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap');
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Manrope', sans-serif;
     margin: 0;
     padding: 0;
     color: #333;
-    background-color: #f4f7f6; /* Un gris muy claro para el fondo general si es necesario */
+    background-color: #f4f7f6;
 }
 
 a {
@@ -20,9 +21,8 @@ button {
     font-weight: bold;
 }
 
-/* Encabezado */
 .site-header {
-    background-color: #ffffff; /* Fondo blanco para el header como en la imagen */
+    background-color: #ffffff; 
     padding: 15px 5%;
     display: flex;
     justify-content: space-between;
@@ -36,7 +36,7 @@ button {
 }
 
 .logo-circle {
-    background-color: #2c3e50; /* Azul oscuro del logo ST */
+    background-color: #2c3e50;
     color: white;
     width: 40px;
     height: 40px;
@@ -52,7 +52,7 @@ button {
 .logo-text {
     font-size: 1.5em;
     font-weight: bold;
-    color: #2c3e50; /* Azul oscuro del texto ShowTime */
+    color: #2c3e50; 
 }
 
 .main-nav ul {
@@ -72,24 +72,23 @@ button {
 }
 
 .main-nav a:hover {
-    color: #007bff; /* Un color para el hover */
+    color: #007bff; 
 }
 
 .auth-buttons .login-btn {
     background-color: transparent;
-    border: 1px solid #ccc; /* Borde gris claro */
+    border: 1px solid #ccc; 
     color: #333;
     margin-right: 10px;
 }
 
 .auth-buttons .signup-btn {
-    background-color: #2c3e50; /* Azul oscuro del botón Crear Cuenta */
+    background-color: #2c3e50; 
     color: white;
 }
 
-/* Sección Hero */
 .hero-section {
-    background-color: #4a7c82; /* Color verdoso oscuro del hero */
+    background-color: #4a7c82; 
     color: white;
     text-align: center;
     padding: 80px 20px;
@@ -106,18 +105,17 @@ button {
 }
 
 .explore-events-btn {
-    background-color: #82c5c5; /* Azul claro del botón */
-    color: #2c3e50; /* Texto oscuro */
+    background-color: #82c5c5; 
+    color: #2c3e50; 
     padding: 15px 35px;
     font-size: 1.1em;
     border-radius: 8px;
 }
 
-/* Categorías Populares */
 .popular-categories {
     padding: 60px 5%;
     text-align: center;
-    background-color: #ffffff; /* Fondo blanco para esta sección */
+    background-color: #ffffff; 
 }
 
 .popular-categories h2 {
@@ -134,11 +132,11 @@ button {
 
 .category-item {
     margin: 20px;
-    width: 150px; /* Ancho fijo para cada categoría */
+    width: 150px; 
 }
 
 .category-icon-bg {
-    background-color: #b2d8d8; /* Azul verdoso claro para el fondo del ícono */
+    background-color: #b2d8d8; 
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -146,8 +144,8 @@ button {
     justify-content: center;
     align-items: center;
     margin: 0 auto 15px auto;
-    font-size: 2em; /* Tamaño para el texto del ícono placeholder */
-    color: #2c3e50; /* Color para el texto del ícono placeholder */
+    font-size: 2em; 
+    color: #2c3e50;
 }
 
 .category-item p {
@@ -155,12 +153,12 @@ button {
     color: #2c3e50;
 }
 
-/* Sección CTA (Call to Action) */
+
 .cta-section {
-    background-color: #e0f2f7; /* Azul muy claro para el fondo */
+    background-color: #e0f2f7; 
     padding: 50px 5%;
-    margin: 40px auto; /* Margen superior e inferior */
-    max-width: 800px; /* Ancho máximo para el contenedor */
+    margin: 40px auto; 
+    max-width: 800px; 
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
@@ -190,17 +188,16 @@ button {
 
 
 .view-events-btn {
-    background-color: #82c5c5; /* Mismo color que el botón de explorar eventos */
+    background-color: #82c5c5;
     color: #2c3e50;
     padding: 15px 35px;
     font-size: 1.1em;
     border-radius: 8px;
 }
 
-/* Pie de página */
 .site-footer-bottom {
-    background-color: #0a0a23; /* Azul muy oscuro del footer */
-    color: #f0f0f0; /* Texto claro */
+    background-color: #0a0a23; 
+    color: #f0f0f0; 
     padding: 40px 5%;
     display: flex;
     justify-content: space-between;
@@ -224,16 +221,16 @@ button {
 }
 
 .site-footer-bottom a {
-    color: #c0c0c0; /* Gris claro para los enlaces */
+    color: #c0c0c0; 
 }
 
 .site-footer-bottom a:hover {
-    color: #82c5c5; /* Color de hover */
+    color: #82c5c5; 
 }
 
 .footer-links, .social-media, .contact-info {
     flex: 1;
-    min-width: 200px; /* Para que no se encojan demasiado */
+    min-width: 200px; 
     margin: 10px;
 }
 
@@ -242,7 +239,6 @@ button {
     font-size: 0.9em;
 }
 
-/* Media Queries para responsividad (ejemplo básico) */
 @media (max-width: 768px) {
     .site-header {
         flex-direction: column;
