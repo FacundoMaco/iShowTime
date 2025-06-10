@@ -22,7 +22,7 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "css/style.css"
             ],
             "server": "src/main.server.ts",
             "outputMode": "server",
@@ -80,7 +80,7 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "css/app.css"
             ]
           }
         }
