@@ -1,0 +1,125 @@
+/* Estilos globales y para el componente principal */
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.auth-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logged-in-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.user-icon {
+    font-size: 1.8rem;
+    color: #26a69a; /* Color de acento para el icono de usuario */
+}
+
+.logout-btn {
+    background-color: #f44336; /* Un rojo para el botón de cerrar sesión */
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #d32f2f;
+}
+
+.site-footer-bottom {
+    background-color: #333;
+    color: #f8f8f8;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.site-footer-bottom h3 {
+    color: #e0f2f1; /* Un color ligeramente más claro para los títulos */
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+}
+
+.site-footer-bottom ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.site-footer-bottom ul li {
+    margin-bottom: 0.7rem;
+}
+
+.site-footer-bottom a {
+    color: #f8f8f8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.site-footer-bottom a:hover {
+    color: #26a69a; /* Color de acento al pasar el ratón */
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #555; /* Fondo más oscuro para los iconos */
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: #26a69a; /* Color de acento al pasar el ratón */
+}
+
+.contact-info p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .site-footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .social-media {
+        margin-bottom: 1.5rem;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+} 

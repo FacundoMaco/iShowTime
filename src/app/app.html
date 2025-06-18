@@ -1,53 +1,52 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShowTime</title>
-    <!-- Aquí irían los enlaces a los archivos CSS -->
-</head>
-<body>
-    <header class="site-header">
-        <div class="logo-container">
+<header class="site-header">
+    <div class="logo-container">
+        <a routerLink="/">
             <span class="logo-circle">ST</span>
             <span class="logo-text">ShowTime</span>
-        </div>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#events">Eventos</a></li>
-                <li><a href="#about">Nosotros</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
-        </nav>
-        <div class="auth-buttons">
+        </a>
+    </div>
+    <nav class="main-nav">
+        <ul>
+            <li><a routerLink="/events">Eventos</a></li>
+            <li><a routerLink="/about">Nosotros</a></li>
+            <li><a routerLink="/my-events">Mis Eventos</a></li>
+        </ul>
+    </nav>
+    <div class="auth-section">
+        <div class="auth-buttons" *ngIf="!(isLoggedIn$ | async)">
             <button class="login-btn" routerLink="/login">Iniciar sesión</button>
             <button class="register-btn" routerLink="/register">Crear Cuenta</button>
         </div>
-    </header>
-
-    <router-outlet></router-outlet>
-
-    <footer class="site-footer-bottom">
-        <div class="footer-links">
-            <h3>Enlaces rápidos</h3>
-            <ul>
-                <li><a href="#">Acerca de nosotros</a></li>
-                <li><a href="#">Términos y condiciones</a></li>
-                <li><a href="#">Código de ética</a></li>
-            </ul>
+        <div class="logged-in-controls" *ngIf="isLoggedIn$ | async">
+            <i class="fas fa-user-circle user-icon"></i>
+            <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
         </div>
-        <div class="social-media">
-            <h3>Síguenos en redes</h3>
-            <!-- Aquí irían los íconos/enlaces de redes sociales -->
-        </div>
-        <div class="contact-info">
-            <h3>Contacto</h3>
-            <p>info&#64;showtime.com</p>
-            <p>2023 ShowTime - Todos los derechos reservados</p>
-            <p><a href="#">Libro de reclamaciones</a></p>
-        </div>
-    </footer>
+    </div>
+</header>
 
-</body>
-</html>
+<router-outlet></router-outlet>
+
+<footer class="site-footer-bottom">
+    <div class="footer-links">
+        <h3>Enlaces rápidos</h3>
+        <ul>
+            <li><a href="#">Acerca de nosotros</a></li>
+            <li><a href="#">Términos y condiciones</a></li>
+            <li><a href="#">Código de ética</a></li>
+        </ul>
+    </div>
+    <div class="social-media">
+        <h3>Síguenos en redes</h3>
+        <div class="social-icons">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    <div class="contact-info">
+        <h3>Contacto</h3>
+        <p>info&#64;showtime.com</p>
+        <p>2025 ShowTime - Todos los derechos reservados</p>
+        <p><a href="#">Libro de reclamaciones</a></p>
+    </div>
+</footer>
