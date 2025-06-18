@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   title = 'iShowTime';
   isLoggedIn$: Observable<boolean>;
+  isMobileMenuOpen = false;
 
   constructor(private authService: AuthService, private router: Router) {
     this.isLoggedIn$ = this.authService.isLoggedIn$;
@@ -22,5 +23,15 @@ export class AppComponent {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    
+    if (this.isMobileMenuOpen) {
+      document.body.classList.add('mobile-menu-open');
+    } else {
+      document.body.classList.remove('mobile-menu-open');
+    }
   }
 }

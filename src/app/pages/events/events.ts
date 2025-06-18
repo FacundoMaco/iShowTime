@@ -120,6 +120,33 @@ export class Events {
     }
   }
 
+  reserveEvent(eventId: number): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const eventToReserve = this.mockEvents.find(event => event.id === eventId);
+      if (eventToReserve) {
+        let reservedEvents: Event[] = JSON.parse(localStorage.getItem('reservedEvents') || '[]');
+        const eventExists = reservedEvents.some(event => event.id === eventToReserve.id);
+
+        if (!eventExists) {
+          reservedEvents.push(eventToReserve);
+          localStorage.setItem('reservedEvents', JSON.stringify(reservedEvents));
+          console.log(`Evento con ID: ${eventId} reservado.`);
+          
+          // Mostrar confirmación de reserva
+          this.showConfirmation = true;
+          setTimeout(() => {
+            this.showConfirmation = false;
+          }, 3000);
+        } else {
+          console.log(`Evento con ID: ${eventId} ya está reservado.`);
+          // Opcional: mostrar mensaje de que ya está reservado
+        }
+      }
+    } else {
+      console.log('localStorage no disponible en este entorno.');
+    }
+  }
+
   openEventDetails(event: Event): void {
     this.selectedEvent = event;
   }

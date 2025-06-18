@@ -1,30 +1,39 @@
-<header class="site-header">
-    <div class="logo-container">
-        <a routerLink="/">
-            <span class="logo-circle">ST</span>
-            <span class="logo-text">ShowTime</span>
-        </a>
-    </div>
-    <nav class="main-nav">
-        <ul>
-            <li><a routerLink="/events">Eventos</a></li>
-            <li><a routerLink="/about">Nosotros</a></li>
-            <li><a routerLink="/my-events">Mis Eventos</a></li>
-        </ul>
-    </nav>
-    <div class="auth-section">
-        <div class="auth-buttons" *ngIf="!(isLoggedIn$ | async)">
-            <button class="login-btn" routerLink="/login">Iniciar sesión</button>
-            <button class="register-btn" routerLink="/register">Crear Cuenta</button>
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="logo-container">
+            <a routerLink="/" class="logo-link">
+                <img src="assets/img/LogoNavBar1.png" alt="iShowTime Logo" class="logo">
+            </a>
         </div>
-        <div class="logged-in-controls" *ngIf="isLoggedIn$ | async">
-            <i class="fas fa-user-circle user-icon"></i>
-            <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+        
+        <div class="navbar-menu">
+            <div class="hamburger-menu" (click)="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <div class="navbar-links" [class.mobile-menu-open]="isMobileMenuOpen">
+                <a class="nav-link" routerLink="/events">Eventos</a>
+                <a class="nav-link" routerLink="/nosotros">Nosotros</a>
+                <a href="/mis-eventos" class="nav-link">Mis Eventos</a>
+                <div class="nav-auth-links">
+                    <a class="login-link" routerLink="/login">Iniciar sesión</a>
+                    <a class="register-link" routerLink="/register">Registrarse</a>
+                </div>
+            </div>
         </div>
     </div>
-</header>
+    
+    <div class="mobile-menu-overlay" 
+         *ngIf="isMobileMenuOpen" 
+         (click)="toggleMobileMenu()">
+    </div>
+</nav>
 
-<router-outlet></router-outlet>
+<main>
+    <router-outlet></router-outlet>
+</main>
 
 <footer class="site-footer-bottom">
     <div class="footer-links">
