@@ -1,0 +1,191 @@
+/* Path: src/app/pages/my-events/my-events.css */
+
+.my-events-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.my-events-content {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.saved-events-list {
+  flex: 2;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+}
+
+.events-calendar {
+  flex: 3;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+}
+
+.saved-events-list h2,
+.events-calendar h2 {
+  color: #26a69a;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.8rem;
+}
+
+.no-events-message {
+  text-align: center;
+  color: #777;
+  padding: 2rem;
+  border: 1px dashed #ddd;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.no-events-message p {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.saved-event-card {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.saved-event-card h3 {
+  color: #333;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.saved-event-card p {
+  color: #666;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.saved-event-card p i {
+  color: #26a69a;
+}
+
+.delete-btn {
+  background-color: #ff5252;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 0.8rem;
+  align-self: flex-end;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #e04b4b;
+}
+
+/* Calendar Styles */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.calendar-header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #26a69a;
+}
+
+.calendar-days-of-week div {
+  font-weight: bold;
+  color: #777;
+  padding: 0.5rem 0;
+}
+
+.calendar-dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.calendar-dates div {
+  padding: 0.8rem 0.2rem;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: #555;
+  font-size: 0.9rem;
+  position: relative;
+  min-height: 50px; /* Asegura espacio para marcadores de eventos */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.calendar-dates div.current-month {
+  background-color: #e8f5e9;
+  color: #333;
+}
+
+.calendar-dates div.has-event {
+  background-color: #c8e6c9; /* Un poco más oscuro para días con eventos */
+  border: 1px solid #26a69a;
+}
+
+.event-markers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.event-marker {
+  width: 8px;
+  height: 8px;
+  background-color: #26a69a;
+  border-radius: 50%;
+  margin: 0 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .my-events-content {
+    flex-direction: column;
+  }
+} 

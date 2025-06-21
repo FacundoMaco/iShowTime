@@ -1,0 +1,44 @@
+<div class="my-events-container">
+  <h1>Mis Eventos Guardados</h1>
+
+  <div class="my-events-content">
+    <div class="saved-events-list">
+      <h2>Eventos Guardados</h2>
+      <div *ngIf="savedEvents.length === 0" class="no-events-message">
+        <p>No tienes eventos guardados aún.</p>
+        <p>Explora la sección de Eventos para guardar tus favoritos.</p>
+      </div>
+      <div *ngFor="let event of savedEvents" class="saved-event-card">
+        <h3>{{ event.title }}</h3>
+        <p><i class="fas fa-calendar-alt"></i> {{ event.date }}</p>
+        <p><i class="fas fa-clock"></i> {{ event.time }}</p>
+        <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+        <button class="delete-btn" (click)="removeEvent(event.id)">Eliminar</button>
+      </div>
+    </div>
+
+    <div class="events-calendar">
+      <h2>Calendario</h2>
+      <!-- Aquí se integrará el calendario -->
+      <div class="calendar-grid">
+        <div class="calendar-header">
+          <button (click)="prevMonth()">&lt;</button>
+          <span>{{ currentMonthYear }}</span>
+          <button (click)="nextMonth()">&gt;</button>
+        </div>
+        <div class="calendar-days-of-week">
+          <div *ngFor="let day of daysOfWeek">{{ day }}</div>
+        </div>
+        <div class="calendar-dates">
+          <div *ngFor="let day of calendarDays"
+               [ngClass]="{'current-month': day.isCurrentMonth, 'has-event': day.events.length > 0}">
+            {{ day.date }}
+            <div *ngIf="day.events.length > 0" class="event-markers">
+              <span *ngFor="let event of day.events" class="event-marker"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
