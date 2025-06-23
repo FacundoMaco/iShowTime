@@ -1,6 +1,5 @@
-// import { ... } from '@angular/ssr/node';
-// All SSR-related code has been commented out for client-only mode.
-// If you want to enable SSR, update your Angular version and code accordingly.
+// Este archivo está deshabilitado para SSR (Server Side Rendering).
+// Si deseas habilitar SSR, actualiza tu versión de Angular y ajusta el código correspondiente.
 
 import express from 'express';
 import { join } from 'node:path';
@@ -57,4 +56,4 @@ app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
 
-// export const reqHandler = createNodeRequestHandler(app); // SSR handler removed
+// export const reqHandler = createNodeRequestHandler(app); // Handler SSR eliminado
