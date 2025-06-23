@@ -1,8 +1,1 @@
-import { RenderMode, ServerRoute } from '@angular/ssr';
-
-export const serverRoutes: ServerRoute[] = [
-  {
-    path: '**',
-    renderMode: RenderMode.Prerender
-  }
-];
+// Server routes for SSR are not supported in Angular 17. File content removed.
