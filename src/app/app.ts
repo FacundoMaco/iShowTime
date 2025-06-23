@@ -27,7 +27,7 @@ export class AppComponent {
 
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    
+
     if (this.isMobileMenuOpen) {
       document.body.classList.add('mobile-menu-open');
     } else {
