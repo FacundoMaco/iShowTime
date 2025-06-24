@@ -1,0 +1,20 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <a routerLink="/" class="logo">
+      <div class="logo-icon">ST</div>
+      <span class="logo-text">ShowTime</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+      <li><a routerLink="/eventos" routerLinkActive="active">Eventos</a></li>
+      <li><a routerLink="/nosotros" routerLinkActive="active">Nosotros</a></li>
+      <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
+    </ul>
+
+    <div class="auth-buttons">
+      <a routerLink="/auth/login" class="btn btn-secondary">Iniciar sesión</a>
+      <a routerLink="/auth/register" class="btn btn-primary">Crear Cuenta</a>
+    </div>
+  </div>
+</nav>

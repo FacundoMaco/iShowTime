@@ -1,0 +1,56 @@
+/* CSS Variables - Design System */
+:root {
+  /* Colors */
+  --primary: #73DFE6;
+  --primary-100: #DAEEE;
+  --primary-hover: #5BBC70;
+  --primary-disabled: #3A7979;
+  --secondary: #D1F8FF;
+  --secondary-25: #005679;
+  --support: #F9F9E7;
+  --support-0: #011313;
+  --white: #FFFFFF;
+  --dark: #011313;
+  --light-gray: #8EB4C4;
+
+  /* Typography */
+  --font-family-primary: 'Manrope', sans-serif;
+  --font-size-h1: 72px;
+  --font-size-h2: 40px;
+  --font-size-h3: 32px;
+  --font-size-paragraph: 24px;
+  --font-size-small: 18px;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+  --spacing-3xl: 6rem;
+
+  /* Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+  --border-radius-circle: 50%;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal: 1040;
+  --z-popover: 1050;
+  --z-tooltip: 1060;
+}

@@ -1,0 +1,141 @@
+/* Footer Component */
+
+.footer {
+  background: #1a1a2e;
+  color: var(--white);
+  padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-lg);
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.footer-section h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: var(--primary);
+  position: relative;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--primary);
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.footer-section ul li a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 16px;
+  transition: var(--transition-normal);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) 0;
+}
+
+.footer-section ul li a:hover {
+  color: var(--primary);
+  transform: translateX(5px);
+}
+
+.footer-section ul li a i {
+  font-size: 18px;
+  width: 20px;
+  text-align: center;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Hover effects for social media */
+.footer-section ul li a[href*="facebook"]:hover {
+  color: #1877f2;
+}
+
+.footer-section ul li a[href*="instagram"]:hover {
+  color: #e4405f;
+}
+
+.footer-section ul li a[href*="twitter"]:hover {
+  color: #1da1f2;
+}
+
+.footer-section ul li a[href*="linkedin"]:hover {
+  color: #0077b5;
+}
+
+/* Email link styling */
+.footer-section ul li a[href^="mailto"] {
+  word-break: break-all;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer {
+    padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-sm);
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--spacing-lg);
+  }
+
+  .footer-section h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-section ul li a {
+    justify-content: center;
+  }
+
+  .footer-section ul li a:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: var(--spacing-lg) var(--spacing-sm) var(--spacing-sm);
+  }
+
+  .footer-container {
+    gap: var(--spacing-md);
+  }
+
+  .footer-section h3 {
+    font-size: 18px;
+  }
+
+  .footer-section ul li a {
+    font-size: 14px;
+  }
+}

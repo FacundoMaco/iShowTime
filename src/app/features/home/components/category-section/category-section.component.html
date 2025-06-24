@@ -1,0 +1,15 @@
+<section class="categories">
+  <div class="categories-container">
+    <h2 class="categories-title">Categorías populares</h2>
+    <div class="categories-grid">
+      @for (category of categories; track category.id) {
+        <a [routerLink]="category.route" class="category-item">
+          <div class="category-icon">
+            <i [class]="category.icon"></i>
+          </div>
+          <h3 class="category-name">{{ category.name }}</h3>
+        </a>
+      }
+    </div>
+  </div>
+</section>

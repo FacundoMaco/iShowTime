@@ -1,0 +1,7 @@
+/* App Component */
+
+/* Ensure the app takes full height */
+:host {
+  display: block;
+  min-height: 100vh;
+}
