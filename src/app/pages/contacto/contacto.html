@@ -1,10 +1,140 @@
 <section class="contacto-section">
-  <h1>Contacto</h1>
-  <p>Puedes contactarnos en:</p>
-  <ul>
-    <li>Email: info@showtime.com</li>
-    <li><a href="#">Libro de reclamaciones</a></li>
-  </ul>
-  <h2>Síguenos en redes</h2>
-  <p><!-- Aquí irían los íconos/enlaces de redes sociales --></p>
+  <div class="container">
+    <h1>Contáctanos</h1>
+    <p class="subtitle">Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos pronto.</p>
+    
+    <!-- Formulario de contacto -->
+    <div class="form-container">
+      <form [formGroup]="contactoForm" (ngSubmit)="onSubmit()" class="contact-form">
+        <div class="form-group">
+          <label for="nombre">Nombre completo *</label>
+          <input 
+            type="text" 
+            id="nombre" 
+            formControlName="nombre" 
+            placeholder="Tu nombre completo"
+            [class.error]="contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched"
+          >
+          <div class="error-message" *ngIf="contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched">
+            <span *ngIf="contactoForm.get('nombre')?.errors?.['required']">El nombre es requerido</span>
+            <span *ngIf="contactoForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email" 
+            placeholder="tu@email.com"
+            [class.error]="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched"
+          >
+          <div class="error-message" *ngIf="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched">
+            <span *ngIf="contactoForm.get('email')?.errors?.['required']">El email es requerido</span>
+            <span *ngIf="contactoForm.get('email')?.errors?.['email']">Ingresa un email válido</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Teléfono (opcional)</label>
+          <input 
+            type="tel" 
+            id="telefono" 
+            formControlName="telefono" 
+            placeholder="+51 999 999 999"
+            [class.error]="contactoForm.get('telefono')?.invalid && contactoForm.get('telefono')?.touched"
+          >
+          <div class="error-message" *ngIf="contactoForm.get('telefono')?.invalid && contactoForm.get('telefono')?.touched">
+            <span *ngIf="contactoForm.get('telefono')?.errors?.['pattern']">Ingresa un teléfono válido</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="asunto">Asunto *</label>
+          <input 
+            type="text" 
+            id="asunto" 
+            formControlName="asunto" 
+            placeholder="¿En qué podemos ayudarte?"
+            [class.error]="contactoForm.get('asunto')?.invalid && contactoForm.get('asunto')?.touched"
+          >
+          <div class="error-message" *ngIf="contactoForm.get('asunto')?.invalid && contactoForm.get('asunto')?.touched">
+            <span *ngIf="contactoForm.get('asunto')?.errors?.['required']">El asunto es requerido</span>
+            <span *ngIf="contactoForm.get('asunto')?.errors?.['minlength']">El asunto debe tener al menos 5 caracteres</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="mensaje">Mensaje *</label>
+          <textarea 
+            id="mensaje" 
+            formControlName="mensaje" 
+            rows="5" 
+            placeholder="Cuéntanos más detalles sobre tu consulta..."
+            [class.error]="contactoForm.get('mensaje')?.invalid && contactoForm.get('mensaje')?.touched"
+          ></textarea>
+          <div class="error-message" *ngIf="contactoForm.get('mensaje')?.invalid && contactoForm.get('mensaje')?.touched">
+            <span *ngIf="contactoForm.get('mensaje')?.errors?.['required']">El mensaje es requerido</span>
+            <span *ngIf="contactoForm.get('mensaje')?.errors?.['minlength']">El mensaje debe tener al menos 10 caracteres</span>
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn-enviar" 
+          [disabled]="contactoForm.invalid || enviando"
+        >
+          <span *ngIf="!enviando">Enviar Mensaje</span>
+          <span *ngIf="enviando">Enviando...</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Mensaje de éxito -->
+    <div class="mensaje-exito" *ngIf="mensajeEnviado">
+      <div class="exito-content">
+        <h3>¡Mensaje enviado!</h3>
+        <p>Gracias por contactarnos. Te responderemos pronto.</p>
+      </div>
+    </div>
+
+    <!-- Botones de contacto rápido -->
+    <div class="contacto-rapido">
+      <h2>Contacto Rápido</h2>
+      <div class="botones-contacto">
+        <button class="btn-contacto btn-whatsapp" (click)="abrirWhatsApp()">
+          <span class="icon">📱</span>
+          WhatsApp
+        </button>
+        <button class="btn-contacto btn-email" (click)="enviarEmail()">
+          <span class="icon">✉️</span>
+          Email Directo
+        </button>
+        <button class="btn-contacto btn-reclamaciones" (click)="abrirLibroReclamaciones()">
+          <span class="icon">📋</span>
+          Libro de Reclamaciones
+        </button>
+      </div>
+    </div>
+
+    <!-- Información adicional -->
+    <div class="info-adicional">
+      <h2>Información de Contacto</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <h3>📧 Email</h3>
+          <p>info@showtime.com</p>
+        </div>
+        <div class="info-item">
+          <h3>📱 WhatsApp</h3>
+          <p>+51 999 999 999</p>
+        </div>
+        <div class="info-item">
+          <h3>🕒 Horario de Atención</h3>
+          <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section> 
