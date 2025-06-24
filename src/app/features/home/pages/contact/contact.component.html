@@ -1,1 +1,236 @@
-<p>contact works!</p>
+<div class="contact-page">
+  <!-- Hero Section -->
+  <section class="contact-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">¡Hablemos!</h1>
+        <p class="hero-subtitle">
+          ¿Tienes preguntas, sugerencias o necesitas ayuda? Estamos aquí para escucharte.
+          Nuestro equipo está listo para ayudarte a sacar el máximo provecho de ShowTime.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Info Section -->
+  <section class="contact-info-section">
+    <div class="container">
+      <h2 class="section-title">Información de contacto</h2>
+      <div class="contact-info-grid">
+        @for (info of contactInfo; track info.title) {
+          <div class="contact-info-card">
+            <div class="info-icon">
+              <i [class]="info.icon"></i>
+            </div>
+            <h3 class="info-title">{{ info.title }}</h3>
+            @if (info.link) {
+              <a [href]="info.link" class="info-value link" target="_blank" rel="noopener noreferrer">
+                {{ info.value }}
+              </a>
+            } @else {
+              <p class="info-value">{{ info.value }}</p>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="contact-form-section">
+    <div class="container">
+      <div class="form-content">
+        <div class="form-header">
+          <h2 class="section-title">Envíanos un mensaje</h2>
+          <p class="section-subtitle">
+            Completa el formulario y te responderemos en menos de 24 horas
+          </p>
+        </div>
+
+        <!-- Success Message -->
+        @if (showSuccessMessage) {
+          <div class="success-message">
+            <i class="fas fa-check-circle"></i>
+            <div class="success-content">
+              <h3>¡Mensaje enviado con éxito!</h3>
+              <p>Gracias por contactarnos. Te responderemos pronto.</p>
+            </div>
+          </div>
+        }
+
+        <!-- Contact Form -->
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name" class="input-label required">Nombre completo</label>
+              <input
+                type="text"
+                id="name"
+                formControlName="name"
+                class="input"
+                [class.input-error]="isFieldInvalid('name')"
+                placeholder="Tu nombre completo"
+              >
+              @if (isFieldInvalid('name')) {
+                <span class="input-error-message">{{ getFieldError('name') }}</span>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="input-label required">Email</label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                class="input"
+                [class.input-error]="isFieldInvalid('email')"
+                placeholder="tu@email.com"
+              >
+              @if (isFieldInvalid('email')) {
+                <span class="input-error-message">{{ getFieldError('email') }}</span>
+              }
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="subject" class="input-label required">Asunto</label>
+              <input
+                type="text"
+                id="subject"
+                formControlName="subject"
+                class="input"
+                [class.input-error]="isFieldInvalid('subject')"
+                placeholder="¿En qué podemos ayudarte?"
+              >
+              @if (isFieldInvalid('subject')) {
+                <span class="input-error-message">{{ getFieldError('subject') }}</span>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="university" class="input-label">Universidad (opcional)</label>
+              <input
+                type="text"
+                id="university"
+                formControlName="university"
+                class="input"
+                placeholder="Tu universidad"
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="input-label required">Mensaje</label>
+            <textarea
+              id="message"
+              formControlName="message"
+              class="input textarea"
+              [class.input-error]="isFieldInvalid('message')"
+              placeholder="Cuéntanos más detalles..."
+              rows="5"
+            ></textarea>
+            @if (isFieldInvalid('message')) {
+              <span class="input-error-message">{{ getFieldError('message') }}</span>
+            }
+          </div>
+
+          <div class="form-actions">
+            <button
+              type="submit"
+              class="btn btn-primary btn-large"
+              [class.btn-loading]="isSubmitting"
+              [disabled]="isSubmitting"
+            >
+              @if (isSubmitting) {
+                Enviando...
+              } @else {
+                Enviar mensaje
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Links Section -->
+  <section class="social-section">
+    <div class="container">
+      <h2 class="section-title text-white">Síguenos en redes sociales</h2>
+      <p class="section-subtitle text-white">
+        Mantente al día con las últimas noticias y eventos universitarios
+      </p>
+      <div class="social-links">
+        @for (social of socialLinks; track social.platform) {
+          <a
+            [href]="social.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            [attr.aria-label]="'Seguir en ' + social.platform"
+          >
+            <i [class]="social.icon"></i>
+            <span>{{ social.platform }}</span>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3 class="faq-question">¿ShowTime es gratuito para estudiantes?</h3>
+          <p class="faq-answer">
+            Sí, ShowTime es completamente gratuito para todos los estudiantes universitarios.
+            Nuestro objetivo es facilitar el acceso a eventos y experiencias educativas.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">¿Cómo puedo organizar un evento?</h3>
+          <p class="faq-answer">
+            Una vez registrado, puedes crear eventos desde tu panel de control.
+            Simplemente completa la información del evento y nosotros nos encargamos del resto.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">¿Qué universidades están disponibles?</h3>
+          <p class="faq-answer">
+            Actualmente trabajamos con más de 50 universidades en Perú.
+            Si tu universidad no está listada, contáctanos para agregarla.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">¿Cómo puedo reportar un problema?</h3>
+          <p class="faq-answer">
+            Puedes reportar problemas técnicos o de contenido usando este formulario
+            o enviándonos un email directamente a soporte&#64;showtime.com.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">¿Aún no tienes cuenta?</h2>
+        <p class="cta-description">
+          Únete a ShowTime y comienza a descubrir eventos increíbles en tu universidad
+        </p>
+        <div class="cta-buttons">
+          <a routerLink="/auth/register" class="btn btn-primary btn-large">Crear cuenta gratis</a>
+          <a routerLink="/eventos" class="btn btn-secondary btn-large">Explorar eventos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

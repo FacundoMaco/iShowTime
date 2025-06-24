@@ -1,0 +1,37 @@
+<div class="filters">
+  <!-- Category Filters -->
+  <div class="filter-group">
+    <div class="filter-label">
+      <i class="fas fa-filter"></i>
+      Filtros
+    </div>
+    <div class="filter-options">
+      @for (filter of categoryFilters; track filter.value) {
+        <button
+          class="filter-btn"
+          [class.active]="isActiveCategoryFilter(filter.value)"
+          (click)="onCategoryChange(filter.value)">
+          {{ filter.label }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Date Filters -->
+  <div class="filter-group">
+    <div class="filter-label">
+      <i class="fas fa-calendar"></i>
+      Fechas
+    </div>
+    <div class="date-filters">
+      @for (filter of dateFilters; track filter.value) {
+        <button
+          class="date-filter"
+          [class.active]="isActiveDateFilter(filter.value)"
+          (click)="onDateRangeChange(filter.value)">
+          {{ filter.label }}
+        </button>
+      }
+    </div>
+  </div>
+</div>

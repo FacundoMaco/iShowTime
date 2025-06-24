@@ -1,7 +1,7 @@
 /* ShowTime - Main Stylesheet */
 
 /* Import Font Awesome */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
 /* Abstracts */
 @import './abstracts/variables.css';
@@ -16,3 +16,20 @@
 @import './components/buttons.css';
 @import './components/inputs.css';
 @import './components/cards.css';
+
+/* Utilities */
+.text-white { color: var(--white) !important; }
+.text-center { text-align: center; }
+
+/* Container utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+}

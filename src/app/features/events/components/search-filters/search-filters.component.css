@@ -1,0 +1,127 @@
+/* Search Filters Component */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.filter-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-weight: 600;
+  color: var(--dark);
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.filter-label i {
+  color: var(--primary-disabled);
+}
+
+.filter-options,
+.date-filters {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+/* Filter Buttons */
+.filter-btn,
+.date-filter {
+  padding: 8px 16px;
+  border: 2px solid #E5E5E5;
+  background: var(--white);
+  border-radius: var(--border-radius-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  font-family: var(--font-family-primary);
+  font-size: 14px;
+  white-space: nowrap;
+  color: var(--dark);
+}
+
+.filter-btn:hover,
+.date-filter:hover {
+  border-color: var(--primary);
+  background: rgba(115, 223, 230, 0.1);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  background: var(--primary-disabled);
+  border-color: var(--primary-disabled);
+  color: var(--white);
+}
+
+.filter-btn.active:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.date-filter.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+
+.date-filter.active:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+/* Focus states for accessibility */
+.filter-btn:focus,
+.date-filter:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .filter-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    width: 100%;
+  }
+
+  .filter-options,
+  .date-filters {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .filter-btn,
+  .date-filter {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-options,
+  .date-filters {
+    flex-direction: column;
+  }
+
+  .filter-btn,
+  .date-filter {
+    width: 100%;
+    flex: none;
+  }
+}

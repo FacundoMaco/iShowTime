@@ -1,1 +1,42 @@
-<p>event-search works!</p>
+<main class="main-content">
+  <div class="container">
+    <!-- Search Section -->
+    <section class="search-section">
+      <div class="search-bar">
+        <i class="fas fa-search search-icon"></i>
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Buscar eventos"
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="onSearch()"
+        >
+        <button class="search-button" (click)="onSearch()">
+          <i class="fas fa-search"></i>
+          Buscar
+        </button>
+      </div>
+
+      <!-- Search Filters Component -->
+      <app-search-filters (filtersChange)="onFiltersChange($event)"></app-search-filters>
+    </section>
+
+    <!-- Events Grid -->
+    <section class="events-grid">
+      @for (event of filteredEvents; track event.id) {
+        <app-event-card
+          [event]="event"
+          (eventAction)="onEventAction($event)">
+        </app-event-card>
+      }
+
+      @if (filteredEvents.length === 0) {
+        <div class="no-events">
+          <i class="fas fa-calendar-times"></i>
+          <h3>No se encontraron eventos</h3>
+          <p>Intenta cambiar los filtros o términos de búsqueda</p>
+        </div>
+      }
+    </section>
+  </div>
+</main>

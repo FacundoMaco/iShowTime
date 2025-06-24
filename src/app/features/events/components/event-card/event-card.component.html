@@ -1,0 +1,44 @@
+<article class="event-card">
+  <div class="event-image">
+    <i [class]="event.icon"></i>
+    <span
+      class="event-category"
+      [ngClass]="getCategoryClass(event.category)">
+      {{ getCategoryDisplayName(event.category) }}
+    </span>
+  </div>
+
+  <div class="event-body">
+    <h3 class="event-title">{{ event.title }}</h3>
+
+    <div class="event-meta">
+      <div class="event-meta-item">
+        <i class="fas fa-calendar"></i>
+        <span>{{ event.date }}</span>
+      </div>
+      <div class="event-meta-item">
+        <i class="fas fa-clock"></i>
+        <span>{{ event.time }}</span>
+      </div>
+      <div class="event-meta-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>{{ event.location }}</span>
+      </div>
+    </div>
+
+    <div class="event-actions">
+      <button
+        class="btn btn-outline"
+        (click)="onViewDetails()"
+        type="button">
+        Ver detalles
+      </button>
+      <button
+        class="btn btn-solid"
+        (click)="onSaveEvent()"
+        type="button">
+        Guardar
+      </button>
+    </div>
+  </div>
+</article>

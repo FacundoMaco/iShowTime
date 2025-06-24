@@ -1,1 +1,134 @@
-<p>about works!</p>
+<div class="about-page">
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Transformando la vida universitaria</h1>
+        <p class="hero-subtitle">
+          En ShowTime creemos que cada estudiante merece vivir experiencias extraordinarias.
+          Nuestra misión es conectar a la comunidad universitaria a través de eventos únicos
+          que enriquecen la formación académica y personal.
+        </p>
+        <div class="hero-cta">
+          <a routerLink="/eventos" class="btn btn-primary btn-large">Explora eventos</a>
+          <a routerLink="/contacto" class="btn btn-secondary btn-large">Contáctanos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">¿Por qué elegir ShowTime?</h2>
+      <div class="features-grid">
+        @for (feature of features; track feature.title) {
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i [class]="feature.icon"></i>
+            </div>
+            <h3 class="feature-title">{{ feature.title }}</h3>
+            <p class="feature-description">{{ feature.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <h2 class="section-title text-white">Nuestro impacto en números</h2>
+      <div class="stats-grid">
+        @for (stat of stats; track stat.label) {
+          <div class="stat-item">
+            <div class="stat-number">{{ stat.number }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission-section">
+    <div class="container">
+      <div class="mission-content">
+        <div class="mission-text">
+          <h2 class="section-title">Nuestra misión</h2>
+          <p class="mission-description">
+            ShowTime nació de la necesidad de crear un puente entre estudiantes y oportunidades.
+            Sabemos que la universidad no es solo sobre estudiar, sino sobre crecer, conectar y
+            descubrir nuevas pasiones.
+          </p>
+          <p class="mission-description">
+            Trabajamos cada día para que ningún estudiante se pierda una oportunidad de crecimiento,
+            ya sea académica, cultural, deportiva o tecnológica. Porque creemos que las mejores
+            experiencias universitarias suceden cuando sales de tu zona de confort.
+          </p>
+          <div class="mission-values">
+            <div class="value-item">
+              <i class="fas fa-heart"></i>
+              <span>Pasión por la educación</span>
+            </div>
+            <div class="value-item">
+              <i class="fas fa-lightbulb"></i>
+              <span>Innovación constante</span>
+            </div>
+            <div class="value-item">
+              <i class="fas fa-handshake"></i>
+              <span>Comunidad inclusiva</span>
+            </div>
+          </div>
+        </div>
+        <div class="mission-image">
+          <div class="image-placeholder">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <h2 class="section-title">Conoce a nuestro equipo</h2>
+      <p class="section-subtitle">
+        Un grupo apasionado de profesionales dedicados a mejorar la experiencia universitaria
+      </p>
+      <div class="team-grid">
+        @for (member of teamMembers; track member.name) {
+          <div class="team-card">
+            <div class="member-image">
+              <div class="image-placeholder">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
+            <div class="member-info">
+              <h3 class="member-name">{{ member.name }}</h3>
+              <p class="member-role">{{ member.role }}</p>
+              <p class="member-description">{{ member.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">¿Listo para formar parte de ShowTime?</h2>
+        <p class="cta-description">
+          Únete a miles de estudiantes que ya están viviendo experiencias extraordinarias
+        </p>
+        <div class="cta-buttons">
+          <a routerLink="/auth/register" class="btn btn-primary btn-large">Crear cuenta</a>
+          <a routerLink="/contacto" class="btn btn-secondary btn-large">Más información</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

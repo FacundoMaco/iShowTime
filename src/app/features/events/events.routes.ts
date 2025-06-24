@@ -7,6 +7,11 @@ export const eventsRoutes: Routes = [
     title: 'ShowTime - Explorar Eventos'
   },
   {
+    path: 'search',
+    loadComponent: () => import('./pages/event-search/event-search.component').then(m => m.EventSearchComponent),
+    title: 'ShowTime - Buscar Eventos'
+  },
+  {
     path: 'create',
     loadComponent: () => import('./pages/create-event/create-event.component').then(m => m.CreateEventComponent),
     title: 'ShowTime - Crear Evento'
