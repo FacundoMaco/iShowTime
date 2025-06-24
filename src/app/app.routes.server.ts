@@ -1,8 +1,1 @@
-import { RenderMode, ServerRoute } from '@angular/ssr';
-
-export const serverRoutes: ServerRoute[] = [
-  {
-    path: '**',
-    renderMode: RenderMode.Prerender
-  }
-];
+// Archivo deshabilitado para SSR. No se usa en Angular 17+ modo cliente.

@@ -1,0 +1,196 @@
+.register-container {
+  display: flex;
+  background: #c6f6fa;
+  min-height: 80vh;
+  border-radius: 0 0 0 0;
+}
+
+.register-left {
+  flex: 1;
+  background: #b2eaf6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.rocket-img img {
+  width: 120px;
+  margin-bottom: 1.5rem;
+}
+
+.register-left h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #21747b;
+  font-weight: 700;
+}
+
+.register-left p {
+  color: #222;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 250px;
+}
+
+.register-right {
+  flex: 1;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  border-radius: 0 0 0 0;
+}
+
+form {
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.register-icon {
+  margin: 0 auto 0.5rem auto;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #21747b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #21747b;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-row input {
+  flex: 1;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 0.6rem;
+  border: 1px solid #b2eaf6;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+}
+
+input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+button[type="submit"] {
+  background: #21747b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: background 0.2s;
+}
+button[type="submit"]:disabled {
+  background: #b2eaf6;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.divider {
+  text-align: center;
+  color: #888;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.social-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.facebook-btn, .google-btn {
+  flex: 1;
+  background: #f2f2f2;
+  border: none;
+  border-radius: 5px;
+  padding: 0.6rem 0;
+  font-size: 1rem;
+  color: #444;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.facebook-btn:hover {
+  background: #4267B2;
+  color: #fff;
+}
+.google-btn:hover {
+  background: #ea4335;
+  color: #fff;
+}
+
+.login-link {
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+.login-link a {
+  color: #21747b;
+  text-decoration: underline;
+}
+
+.success-container {
+  background: #c6f6fa;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 0 0;
+}
+.success-container h2 {
+  color: #21747b;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.success-icon {
+  font-size: 2.5rem;
+  color: #21747b;
+  margin-bottom: 1rem;
+}
+.success-container p {
+  color: #222;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.success-link {
+  color: #21747b;
+  font-weight: 600;
+  text-decoration: underline;
+  font-size: 1.1rem;
+}
