@@ -1,0 +1,40 @@
+<div *ngIf="!cuentaCreada" class="register-container">
+  <div class="register-left">
+    <div class="rocket-img">
+      <img src="https://cdn-icons-png.flaticon.com/512/3214/3214602.png" alt="Rocket" />
+    </div>
+    <h2>¡Únete a Showtime!</h2>
+    <p>Crea tu cuenta y comienza a descubrir eventos increíbles en tu universidad</p>
+  </div>
+  <div class="register-right">
+    <form (ngSubmit)="crearCuenta()" #registerForm="ngForm">
+      <div class="register-icon"></div>
+      <h3>Crear cuenta</h3>
+      <div class="input-row">
+        <input type="text" name="nombre" [(ngModel)]="nombre" placeholder="Tu nombre" required />
+        <input type="text" name="apellido" [(ngModel)]="apellido" placeholder="Tu apellido" required />
+      </div>
+      <input type="email" name="email" [(ngModel)]="email" placeholder="tu@gmail.com" required />
+      <input type="password" name="password" [(ngModel)]="password" placeholder="contraseña" required />
+      <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" placeholder="contraseña" required />
+      <div class="checkbox-row">
+        <input type="checkbox" name="terminos" [(ngModel)]="terminos" required />
+        <label for="terminos">Acepto los términos y condiciones</label>
+      </div>
+      <button type="submit" [disabled]="!registerForm.form.valid">Crear Cuenta</button>
+      <div class="divider">O regístrate con</div>
+      <div class="social-row">
+        <button type="button" class="facebook-btn">Facebook</button>
+        <button type="button" class="google-btn">Google</button>
+      </div>
+      <div class="login-link">¿Ya tienes una cuenta? <a href="/login">Iniciar sesión</a></div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="cuentaCreada" class="success-container">
+  <h2>¡Bienvenido de nuevo !</h2>
+  <div class="success-icon">✔️</div>
+  <p>Tu cuenta fue creada satisfactoriamente. ¡Es hora de descubrir eventos !</p>
+  <a class="success-link" href="/">Entrar a la web</a>
+</div>

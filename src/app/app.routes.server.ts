@@ -1,1 +1,1 @@
-// Server routes for SSR are not supported in Angular 17. File content removed.
+// Archivo deshabilitado para SSR. No se usa en Angular 17+ modo cliente.
