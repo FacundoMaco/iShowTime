@@ -40,6 +40,32 @@ h1 {
   gap: 1.5rem;
 }
 
+/* Errores generales */
+.errores-generales {
+  background: #fff5f5;
+  border: 2px solid #e74c3c;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.errores-generales h4 {
+  color: #e74c3c;
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+.errores-generales ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.errores-generales li {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -53,7 +79,8 @@ h1 {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   padding: 1rem;
   border: 2px solid #e1e5e9;
   border-radius: 10px;
@@ -62,8 +89,13 @@ h1 {
   background: #f8f9fa;
 }
 
+.form-group select {
+  cursor: pointer;
+}
+
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   outline: none;
   border-color: #667eea;
   background: white;
@@ -71,7 +103,8 @@ h1 {
 }
 
 .form-group input.error,
-.form-group textarea.error {
+.form-group textarea.error,
+.form-group select.error {
   border-color: #e74c3c;
   background: #fff5f5;
 }
@@ -81,6 +114,13 @@ h1 {
   font-size: 0.85rem;
   margin-top: 0.5rem;
   font-weight: 500;
+}
+
+/* Botones del formulario */
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .btn-enviar {
@@ -93,7 +133,7 @@ h1 {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 1rem;
+  flex: 1;
 }
 
 .btn-enviar:hover:not(:disabled) {
@@ -102,6 +142,31 @@ h1 {
 }
 
 .btn-enviar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-limpiar {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.btn-limpiar:hover:not(:disabled) {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(108, 117, 125, 0.3);
+}
+
+.btn-limpiar:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
@@ -261,6 +326,10 @@ h1 {
   .contacto-rapido,
   .info-adicional {
     padding: 1.5rem;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
   }
   
   .botones-contacto {

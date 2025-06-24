@@ -6,6 +6,14 @@
     <!-- Formulario de contacto -->
     <div class="form-container">
       <form [formGroup]="contactoForm" (ngSubmit)="onSubmit()" class="contact-form">
+        <!-- Errores generales del formulario -->
+        <div class="errores-generales" *ngIf="erroresFormulario.length > 0">
+          <h4>Por favor corrige los siguientes errores:</h4>
+          <ul>
+            <li *ngFor="let error of erroresFormulario">{{ error }}</li>
+          </ul>
+        </div>
+
         <div class="form-group">
           <label for="nombre">Nombre completo *</label>
           <input 
@@ -18,6 +26,7 @@
           <div class="error-message" *ngIf="contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched">
             <span *ngIf="contactoForm.get('nombre')?.errors?.['required']">El nombre es requerido</span>
             <span *ngIf="contactoForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres</span>
+            <span *ngIf="contactoForm.get('nombre')?.errors?.['maxlength']">El nombre no puede exceder 50 caracteres</span>
           </div>
         </div>
 
@@ -51,6 +60,25 @@
         </div>
 
         <div class="form-group">
+          <label for="tipoConsulta">Tipo de consulta *</label>
+          <select 
+            id="tipoConsulta" 
+            formControlName="tipoConsulta"
+            [class.error]="contactoForm.get('tipoConsulta')?.invalid && contactoForm.get('tipoConsulta')?.touched"
+          >
+            <option value="general">Consulta general</option>
+            <option value="soporte">Soporte técnico</option>
+            <option value="ventas">Ventas y precios</option>
+            <option value="sugerencia">Sugerencia</option>
+            <option value="reclamo">Reclamo</option>
+            <option value="otro">Otro</option>
+          </select>
+          <div class="error-message" *ngIf="contactoForm.get('tipoConsulta')?.invalid && contactoForm.get('tipoConsulta')?.touched">
+            <span *ngIf="contactoForm.get('tipoConsulta')?.errors?.['required']">Selecciona un tipo de consulta</span>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label for="asunto">Asunto *</label>
           <input 
             type="text" 
@@ -62,6 +90,7 @@
           <div class="error-message" *ngIf="contactoForm.get('asunto')?.invalid && contactoForm.get('asunto')?.touched">
             <span *ngIf="contactoForm.get('asunto')?.errors?.['required']">El asunto es requerido</span>
             <span *ngIf="contactoForm.get('asunto')?.errors?.['minlength']">El asunto debe tener al menos 5 caracteres</span>
+            <span *ngIf="contactoForm.get('asunto')?.errors?.['maxlength']">El asunto no puede exceder 100 caracteres</span>
           </div>
         </div>
 
@@ -77,17 +106,28 @@
           <div class="error-message" *ngIf="contactoForm.get('mensaje')?.invalid && contactoForm.get('mensaje')?.touched">
             <span *ngIf="contactoForm.get('mensaje')?.errors?.['required']">El mensaje es requerido</span>
             <span *ngIf="contactoForm.get('mensaje')?.errors?.['minlength']">El mensaje debe tener al menos 10 caracteres</span>
+            <span *ngIf="contactoForm.get('mensaje')?.errors?.['maxlength']">El mensaje no puede exceder 1000 caracteres</span>
           </div>
         </div>
 
-        <button 
-          type="submit" 
-          class="btn-enviar" 
-          [disabled]="contactoForm.invalid || enviando"
-        >
-          <span *ngIf="!enviando">Enviar Mensaje</span>
-          <span *ngIf="enviando">Enviando...</span>
-        </button>
+        <div class="form-buttons">
+          <button 
+            type="submit" 
+            class="btn-enviar" 
+            [disabled]="contactoForm.invalid || enviando"
+          >
+            <span *ngIf="!enviando">Enviar Mensaje</span>
+            <span *ngIf="enviando">Enviando...</span>
+          </button>
+          <button 
+            type="button" 
+            class="btn-limpiar" 
+            (click)="limpiarFormulario()"
+            [disabled]="enviando"
+          >
+            Limpiar Formulario
+          </button>
+        </div>
       </form>
     </div>
 
