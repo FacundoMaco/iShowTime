@@ -1,0 +1,202 @@
+<div class="events-create-container">
+  <div class="header">
+    <h1>Crear Nuevo Evento</h1>
+    <p>Completa el formulario para crear tu evento</p>
+  </div>
+
+  <!-- Mensajes de estado -->
+  <div *ngIf="showSuccess" class="success-message">
+    <p>✅ Evento creado exitosamente. Redirigiendo...</p>
+  </div>
+
+  <div *ngIf="showError" class="error-message">
+    <p>❌ {{ errorMessage }}</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" class="event-form">
+    <div class="form-grid">
+      <!-- Información básica -->
+      <div class="form-section">
+        <h3>Información Básica</h3>
+        
+        <div class="form-group">
+          <label for="title">Título del Evento *</label>
+          <input 
+            type="text" 
+            id="title"
+            name="title"
+            [(ngModel)]="eventForm.title"
+            placeholder="Ej: Hackathon Innovate 2025"
+            required
+            class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="category">Categoría *</label>
+          <select 
+            id="category"
+            name="category"
+            [(ngModel)]="eventForm.category"
+            (change)="onCategoryChange()"
+            required
+            class="form-control">
+            <option value="">Selecciona una categoría</option>
+            <option *ngFor="let category of categories" [value]="category">
+              {{ category | titlecase }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Fecha *</label>
+            <input 
+              type="date" 
+              id="date"
+              name="date"
+              [(ngModel)]="eventForm.date"
+              [min]="getMinDate()"
+              required
+              class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="time">Hora *</label>
+            <input 
+              type="time" 
+              id="time"
+              name="time"
+              [(ngModel)]="eventForm.time"
+              required
+              class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Ubicación *</label>
+          <input 
+            type="text" 
+            id="location"
+            name="location"
+            [(ngModel)]="eventForm.location"
+            placeholder="Ej: Campus - San Isidro"
+            required
+            class="form-control">
+        </div>
+      </div>
+
+      <!-- Descripción y detalles -->
+      <div class="form-section">
+        <h3>Descripción y Detalles</h3>
+        
+        <div class="form-group">
+          <label for="description">Descripción del Evento *</label>
+          <textarea 
+            id="description"
+            name="description"
+            [(ngModel)]="eventForm.description"
+            placeholder="Describe tu evento, objetivos, público objetivo..."
+            rows="4"
+            required
+            class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="organizer">Organizador *</label>
+          <input 
+            type="text" 
+            id="organizer"
+            name="organizer"
+            [(ngModel)]="eventForm.organizer"
+            placeholder="Ej: Tech Innovators"
+            required
+            class="form-control">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="price">Precio</label>
+            <input 
+              type="text" 
+              id="price"
+              name="price"
+              [(ngModel)]="eventForm.price"
+              (blur)="formatPrice()"
+              placeholder="Ej: $25.00, Gratis, Entrada Libre"
+              class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="maxAttendees">Máximo de Asistentes</label>
+            <input 
+              type="number" 
+              id="maxAttendees"
+              name="maxAttendees"
+              [(ngModel)]="eventForm.maxAttendees"
+              min="1"
+              max="1000"
+              class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <!-- Información de contacto -->
+      <div class="form-section">
+        <h3>Información de Contacto</h3>
+        
+        <div class="form-group">
+          <label for="contactEmail">Email de Contacto *</label>
+          <input 
+            type="email" 
+            id="contactEmail"
+            name="contactEmail"
+            [(ngModel)]="eventForm.contactEmail"
+            placeholder="contacto@evento.com"
+            required
+            class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="contactPhone">Teléfono de Contacto</label>
+          <input 
+            type="tel" 
+            id="contactPhone"
+            name="contactPhone"
+            [(ngModel)]="eventForm.contactPhone"
+            placeholder="+51 999 999 999"
+            class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="form-actions">
+      <button 
+        type="button" 
+        (click)="resetForm()"
+        class="btn btn-secondary">
+        Limpiar Formulario
+      </button>
+      
+      <button 
+        type="submit" 
+        [disabled]="isSubmitting"
+        class="btn btn-primary">
+        <span *ngIf="!isSubmitting">Crear Evento</span>
+        <span *ngIf="isSubmitting">Creando...</span>
+      </button>
+    </div>
+  </form>
+
+  <!-- Información adicional -->
+  <div class="info-section">
+    <h4>📋 Información Importante</h4>
+    <ul>
+      <li>Los campos marcados con * son obligatorios</li>
+      <li>La fecha del evento debe ser futura</li>
+      <li>El email de contacto será visible para los asistentes</li>
+      <li>Puedes editar tu evento después de crearlo</li>
+      <li>Los eventos serán revisados antes de ser publicados</li>
+    </ul>
+  </div>
+</div> 

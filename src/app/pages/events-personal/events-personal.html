@@ -1,0 +1,169 @@
+<div class="events-personal-container">
+  <div class="header">
+    <h1>Mis Eventos Personales</h1>
+    <p>Gestiona todos tus eventos guardados y reservados</p>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filters">
+    <div class="filter-buttons">
+      <button 
+        [class.active]="filterStatus === 'all'"
+        (click)="filterStatus = 'all'"
+        class="filter-btn">
+        Todos
+      </button>
+      <button 
+        [class.active]="filterStatus === 'active'"
+        (click)="filterStatus = 'active'"
+        class="filter-btn">
+        Activos
+      </button>
+      <button 
+        [class.active]="filterStatus === 'completed'"
+        (click)="filterStatus = 'completed'"
+        class="filter-btn">
+        Completados
+      </button>
+      <button 
+        [class.active]="filterStatus === 'cancelled'"
+        (click)="filterStatus = 'cancelled'"
+        class="filter-btn">
+        Cancelados
+      </button>
+    </div>
+  </div>
+
+  <!-- Mensaje de confirmación -->
+  <div *ngIf="showConfirmation" class="confirmation-message">
+    <p>Evento eliminado exitosamente</p>
+  </div>
+
+  <!-- Lista de eventos -->
+  <div class="events-grid" *ngIf="filteredEvents.length > 0; else noEvents">
+    <div class="event-card" *ngFor="let event of filteredEvents">
+      <div class="event-header">
+        <span class="category-badge">{{ event.category }}</span>
+        <span [class]="'status-badge ' + getStatusClass(event.status)">
+          {{ getStatusText(event.status) }}
+        </span>
+      </div>
+      
+      <div class="event-content">
+        <h3 class="event-title">{{ event.title }}</h3>
+        <div class="event-details">
+          <div class="detail-item">
+            <i class="icon">📅</i>
+            <span>{{ event.date }}</span>
+          </div>
+          <div class="detail-item">
+            <i class="icon">🕒</i>
+            <span>{{ event.time }}</span>
+          </div>
+          <div class="detail-item">
+            <i class="icon">📍</i>
+            <span>{{ event.location }}</span>
+          </div>
+          <div class="detail-item">
+            <i class="icon">👤</i>
+            <span>{{ event.organizer }}</span>
+          </div>
+          <div class="detail-item">
+            <i class="icon">💰</i>
+            <span>{{ event.price }}</span>
+          </div>
+        </div>
+        
+        <p class="event-description">{{ event.description }}</p>
+      </div>
+      
+      <div class="event-actions">
+        <button 
+          (click)="openEventDetails(event)"
+          class="btn btn-primary">
+          Ver Detalles
+        </button>
+        <button 
+          (click)="removeEvent(event.id)"
+          class="btn btn-danger">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje cuando no hay eventos -->
+  <ng-template #noEvents>
+    <div class="no-events">
+      <div class="no-events-content">
+        <i class="no-events-icon">📅</i>
+        <h3>No tienes eventos personales</h3>
+        <p>Comienza explorando eventos y guárdalos para verlos aquí</p>
+        <a routerLink="/eventos" class="btn btn-primary">Explorar Eventos</a>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- Modal de detalles del evento -->
+  <div *ngIf="selectedEvent" class="modal-overlay" (click)="closeEventDetails()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ selectedEvent.title }}</h2>
+        <button class="close-btn" (click)="closeEventDetails()">×</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="event-info">
+          <div class="info-row">
+            <strong>Categoría:</strong>
+            <span>{{ selectedEvent.category }}</span>
+          </div>
+          <div class="info-row">
+            <strong>Fecha:</strong>
+            <span>{{ selectedEvent.date }}</span>
+          </div>
+          <div class="info-row">
+            <strong>Hora:</strong>
+            <span>{{ selectedEvent.time }}</span>
+          </div>
+          <div class="info-row">
+            <strong>Ubicación:</strong>
+            <span>{{ selectedEvent.location }}</span>
+          </div>
+          <div class="info-row">
+            <strong>Organizador:</strong>
+            <span>{{ selectedEvent.organizer }}</span>
+          </div>
+          <div class="info-row">
+            <strong>Precio:</strong>
+            <span>{{ selectedEvent.price }}</span>
+          </div>
+          <div class="info-row">
+            <strong>Estado:</strong>
+            <span [class]="getStatusClass(selectedEvent.status)">
+              {{ getStatusText(selectedEvent.status) }}
+            </span>
+          </div>
+        </div>
+        
+        <div class="event-description-full">
+          <strong>Descripción:</strong>
+          <p>{{ selectedEvent.description }}</p>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button 
+          (click)="removeEvent(selectedEvent.id)"
+          class="btn btn-danger">
+          Eliminar de Mis Eventos
+        </button>
+        <button 
+          (click)="closeEventDetails()"
+          class="btn btn-secondary">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

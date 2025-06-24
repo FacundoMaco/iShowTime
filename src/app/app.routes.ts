@@ -7,6 +7,8 @@ import { About } from './pages/about/about';
 import { MyEvents } from './pages/my-events/my-events';
 import { ResetPassword } from './pages/reset-password/reset-password';
 import { RegisterConfirmation } from './pages/register-confirmation/register-confirmation';
+import { EventsPersonal } from './pages/events-personal/events-personal';
+import { EventsCreate } from './pages/events-create/events-create';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -17,5 +19,7 @@ export const routes: Routes = [
     { path: 'nosotros', component: About },
     { path: 'mis-eventos', component: MyEvents },
     { path: 'reset-password', component: ResetPassword },
-    { path: 'register-confirmation', component: RegisterConfirmation }
+    { path: 'register-confirmation', component: RegisterConfirmation },
+    { path: 'eventos-personales', component: EventsPersonal },
+    { path: 'crear-evento', component: EventsCreate }
 ];
