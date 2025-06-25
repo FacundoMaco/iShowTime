@@ -1,0 +1,141 @@
+<div class="events-saved-container">
+  <div class="header">
+    <h1>📋 Mis Eventos Guardados</h1>
+    <p>Gestiona y visualiza todos los eventos que has creado</p>
+  </div>
+
+  <!-- Filtros y búsqueda -->
+  <div class="filters-section">
+    <div class="search-box">
+      <input 
+        type="text" 
+        placeholder="Buscar eventos..." 
+        [(ngModel)]="searchQuery"
+        (input)="onSearchChange()"
+        class="search-input">
+      <span class="search-icon">🔍</span>
+    </div>
+    
+    <div class="filter-controls">
+      <select [(ngModel)]="selectedCategory" (change)="onCategoryFilter()" class="filter-select">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category | titlecase }}
+        </option>
+      </select>
+      
+      <select [(ngModel)]="selectedStatus" (change)="onStatusFilter()" class="filter-select">
+        <option value="">Todos los estados</option>
+        <option value="active">Activos</option>
+        <option value="inactive">Inactivos</option>
+        <option value="pending">Pendientes</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <div class="stat-number">{{ totalEvents }}</div>
+      <div class="stat-label">Total Eventos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ activeEvents }}</div>
+      <div class="stat-label">Activos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ totalAttendees }}</div>
+      <div class="stat-label">Total Asistentes</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ upcomingEvents }}</div>
+      <div class="stat-label">Próximos</div>
+    </div>
+  </div>
+
+  <!-- Mensajes de estado -->
+  <div *ngIf="showSuccess" class="success-message">
+    <p>✅ {{ successMessage }}</p>
+  </div>
+
+  <div *ngIf="showError" class="error-message">
+    <p>❌ {{ errorMessage }}</p>
+  </div>
+
+  <!-- Lista de eventos -->
+  <div class="events-grid" *ngIf="filteredEvents.length > 0; else noEvents">
+    <div *ngFor="let event of filteredEvents" class="event-card">
+      <div class="event-header">
+        <div class="event-status" [class]="'status-' + event.status">
+          {{ getStatusText(event.status) }}
+        </div>
+        <div class="event-actions">
+          <button (click)="editEvent(event.id)" class="btn-edit" title="Editar evento">
+            ✏️
+          </button>
+          <button (click)="deleteEvent(event.id)" class="btn-delete" title="Eliminar evento">
+            🗑️
+          </button>
+        </div>
+      </div>
+      
+      <div class="event-content">
+        <h3 class="event-title">{{ event.title }}</h3>
+        <div class="event-category">{{ event.category | titlecase }}</div>
+        
+        <div class="event-details">
+          <div class="detail-item">
+            <span class="detail-icon">📅</span>
+            <span>{{ formatDate(event.date) }} a las {{ event.time }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">📍</span>
+            <span>{{ event.location }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">👥</span>
+            <span>{{ event.attendees || 0 }} / {{ event.maxAttendees || '∞' }} asistentes</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">💰</span>
+            <span>{{ event.price || 'Gratis' }}</span>
+          </div>
+        </div>
+        
+        <p class="event-description">{{ event.description | slice:0:150 }}{{ event.description.length > 150 ? '...' : '' }}</p>
+        
+        <div class="event-footer">
+          <div class="event-organizer">
+            <span class="organizer-icon">👤</span>
+            {{ event.organizer }}
+          </div>
+          <div class="event-date-created">
+            Creado: {{ formatDate(event.createdAt) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje cuando no hay eventos -->
+  <ng-template #noEvents>
+    <div class="no-events">
+      <div class="no-events-icon">📭</div>
+      <h3>No hay eventos guardados</h3>
+      <p *ngIf="searchQuery || selectedCategory || selectedStatus">
+        No se encontraron eventos con los filtros aplicados.
+      </p>
+      <p *ngIf="!searchQuery && !selectedCategory && !selectedStatus">
+        Aún no has creado ningún evento. ¡Comienza creando tu primer evento!
+      </p>
+      <button (click)="createNewEvent()" class="btn-create-event">
+        🎉 Crear mi primer evento
+      </button>
+    </div>
+  </ng-template>
+
+  <!-- Botón flotante para crear nuevo evento -->
+  <button (click)="createNewEvent()" class="floating-action-btn" title="Crear nuevo evento">
+    ➕
+  </button>
+</div> 

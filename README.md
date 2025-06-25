@@ -73,4 +73,99 @@ En la actualidad, la información sobre eventos está dispersa en múltiples can
 
 Este proyecto ha sido desarrollado como parte del curso **IHC y Programación Web (CC237)** en la Universidad Peruana de Ciencias Aplicadas.
 
+## 🎉 Nueva Funcionalidad: Guardar Eventos
+
+### Características Implementadas
+
+#### 📋 Gestión Completa de Eventos
+- **Crear Eventos**: Formulario completo con validaciones
+- **Guardar Eventos**: Almacenamiento persistente en localStorage
+- **Ver Eventos Guardados**: Interfaz moderna para gestionar eventos
+- **Editar y Eliminar**: Funcionalidades CRUD completas
+- **Filtros y Búsqueda**: Búsqueda por texto, categoría y estado
+
+#### 🎨 Diseño Moderno y Responsivo
+- Interfaz intuitiva y fácil de usar
+- Diseño adaptativo para móviles y tablets
+- Animaciones suaves y feedback visual
+- Estadísticas en tiempo real
+
+#### 🔧 Funcionalidades Técnicas
+- **EventService**: Servicio centralizado para gestión de eventos
+- **Validaciones**: Formularios con validación completa
+- **Persistencia**: Almacenamiento local con localStorage
+- **Rutas**: Navegación integrada en la aplicación
+
+### 🚀 Cómo Usar
+
+#### Crear un Evento
+1. Navega a "Crear Evento" en el menú
+2. Completa el formulario con la información del evento
+3. Haz clic en "Crear Evento"
+4. El evento se guardará automáticamente
+
+#### Ver Eventos Guardados
+1. Navega a "Eventos Guardados" en el menú
+2. Visualiza todos tus eventos creados
+3. Usa los filtros para encontrar eventos específicos
+4. Edita o elimina eventos según necesites
+
+#### Filtros Disponibles
+- **Búsqueda por texto**: Busca en título, descripción, organizador, etc.
+- **Filtro por categoría**: Tecnología, académicos, culturales, etc.
+- **Filtro por estado**: Activo, inactivo, pendiente
+
+### 📊 Estadísticas
+La página de eventos guardados muestra:
+- Total de eventos creados
+- Eventos activos
+- Total de asistentes
+- Eventos próximos
+
+### 🛠️ Tecnologías Utilizadas
+- **Angular 17**: Framework principal
+- **TypeScript**: Lenguaje de programación
+- **CSS3**: Estilos modernos y responsivos
+- **localStorage**: Persistencia de datos
+
+### 📁 Estructura del Proyecto
+
+```
+src/app/
+├── services/
+│   └── event.service.ts          # Servicio para gestión de eventos
+├── pages/
+│   ├── events-create/            # Crear eventos
+│   ├── events-saved/             # Ver eventos guardados
+│   └── ...                       # Otras páginas
+└── app.routes.ts                 # Configuración de rutas
+```
+
+### 🔄 Flujo de Trabajo Git
+
+#### Branch Creado
+- `feature/guardareventos`: Branch para la funcionalidad de guardar eventos
+
+#### Commits Realizados
+1. **feat**: Crear EventService para gestión centralizada de eventos
+2. **feat**: Actualizar componente de crear eventos para usar EventService
+3. **feat**: Crear página de eventos guardados con filtros y estadísticas
+4. **feat**: Agregar rutas y navegación para nueva funcionalidad
+5. **docs**: Actualizar README con nueva funcionalidad
+
+### 🎯 Próximas Mejoras
+- [ ] Integración con backend real
+- [ ] Sistema de notificaciones
+- [ ] Compartir eventos en redes sociales
+- [ ] Calendario de eventos
+- [ ] Sistema de comentarios y valoraciones
+
+### 📝 Notas de Desarrollo
+- La funcionalidad está completamente integrada con el diseño existente
+- Se mantiene la consistencia visual con el resto de la aplicación
+- Código limpio y bien documentado
+- Pruebas manuales realizadas en diferentes dispositivos
+
 ---
+
+**Desarrollado con ❤️ para la comunidad estudiantil**

@@ -2,6 +2,7 @@ import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EventService, Event } from '../../services/event.service';
 
 interface EventForm {
   title: string;
@@ -58,18 +59,33 @@ export class EventsCreate {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private router: Router
+    private router: Router,
+    private eventService: EventService
   ) { }
 
   onSubmit(): void {
     if (this.validateForm()) {
       this.isSubmitting = true;
+      this.showError = false;
       
-      // Simular envío al servidor
-      setTimeout(() => {
-        this.saveEvent();
-        this.isSubmitting = false;
-      }, 1000);
+      // Usar el servicio para guardar el evento
+      this.eventService.saveEvent(this.eventForm)
+        .then((savedEvent: Event) => {
+          this.isSubmitting = false;
+          this.showSuccess = true;
+          this.resetForm();
+          
+          // Ocultar mensaje de éxito después de 3 segundos
+          setTimeout(() => {
+            this.showSuccess = false;
+            this.router.navigate(['/eventos-personales']);
+          }, 3000);
+        })
+        .catch((error: Error) => {
+          this.isSubmitting = false;
+          this.showError = true;
+          this.errorMessage = error.message || 'Error al guardar el evento. Inténtalo de nuevo.';
+        });
     }
   }
 
@@ -144,45 +160,14 @@ export class EventsCreate {
       return false;
     }
 
-    return true;
-  }
-
-  saveEvent(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      try {
-        // Generar ID único
-        const newEvent = {
-          id: Date.now(),
-          ...this.eventForm,
-          status: 'active',
-          createdAt: new Date().toISOString()
-        };
-
-        // Obtener eventos existentes
-        let existingEvents = JSON.parse(localStorage.getItem('createdEvents') || '[]');
-        
-        // Agregar nuevo evento
-        existingEvents.push(newEvent);
-        
-        // Guardar en localStorage
-        localStorage.setItem('createdEvents', JSON.stringify(existingEvents));
-        
-        this.showSuccess = true;
-        
-        // Limpiar formulario
-        this.resetForm();
-        
-        // Ocultar mensaje de éxito después de 3 segundos
-        setTimeout(() => {
-          this.showSuccess = false;
-          this.router.navigate(['/eventos-personales']);
-        }, 3000);
-        
-      } catch (error) {
-        this.showError = true;
-        this.errorMessage = 'Error al guardar el evento. Inténtalo de nuevo.';
-      }
+    // Validar máximo de asistentes
+    if (this.eventForm.maxAttendees && this.eventForm.maxAttendees <= 0) {
+      this.showError = true;
+      this.errorMessage = 'El máximo de asistentes debe ser mayor a 0';
+      return false;
     }
+
+    return true;
   }
 
   resetForm(): void {
@@ -207,13 +192,16 @@ export class EventsCreate {
   }
 
   onCategoryChange(): void {
-    // Lógica adicional si es necesaria cuando cambia la categoría
+    // Lógica adicional para cambios de categoría si es necesaria
   }
 
   formatPrice(): void {
-    // Asegurar que el precio tenga formato válido
-    if (this.eventForm.price && !this.eventForm.price.includes('$') && this.eventForm.price !== 'Gratis' && this.eventForm.price !== 'Entrada Libre') {
-      this.eventForm.price = '$' + this.eventForm.price;
+    if (this.eventForm.price) {
+      // Formatear precio si es necesario
+      const price = this.eventForm.price.trim();
+      if (price && !price.includes('$') && !isNaN(Number(price))) {
+        this.eventForm.price = `$${parseFloat(price).toFixed(2)}`;
+      }
     }
   }
 } 

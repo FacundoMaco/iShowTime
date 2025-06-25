@@ -16,7 +16,9 @@
             <div class="navbar-links" [class.mobile-menu-open]="isMobileMenuOpen">
                 <a class="nav-link" routerLink="/events">Eventos</a>
                 <a class="nav-link" routerLink="/nosotros">Nosotros</a>
-                <a href="/mis-eventos" class="nav-link">Mis Eventos</a>
+                <a class="nav-link" routerLink="/mis-eventos">Mis Eventos</a>
+                <a class="nav-link" routerLink="/eventos-guardados">Eventos Guardados</a>
+                <a class="nav-link" routerLink="/crear-evento">Crear Evento</a>
                 <div class="nav-auth-links">
                     <a class="login-link" routerLink="/login">Iniciar sesión</a>
                     <a class="register-link" routerLink="/register">Registrarse</a>
@@ -39,7 +41,7 @@
     <div class="footer-links">
         <h3>Enlaces rápidos</h3>
         <ul>
-            <li><a href="#">Acerca de nosotros</a></li>
+            <li><a routerLink="/nosotros">Acerca de nosotros</a></li>
             <li><a href="#">Términos y condiciones</a></li>
             <li><a href="#">Código de ética</a></li>
         </ul>
