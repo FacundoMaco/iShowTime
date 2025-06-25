@@ -1,6 +1,6 @@
 [build]
-  publish = "dist/ishowtime"
-  command = "npm run build"
+  command = "ng build --configuration production"
+  publish = "dist/ishowtime/browser"
 
 [build.environment]
   NODE_VERSION = "18"
