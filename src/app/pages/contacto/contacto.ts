@@ -115,7 +115,7 @@ export class Contacto {
   }
 
   enviarEmail() {
-    const email = 'info@showtime.com';
+    const email = 'info&#64;showtime.com';
     const asunto = 'Consulta sobre iShowTime';
     const url = `mailto:${email}?subject=${encodeURIComponent(asunto)}`;
     window.open(url);

@@ -36,7 +36,7 @@
             type="email" 
             id="email" 
             formControlName="email" 
-            placeholder="tu@email.com"
+            placeholder="tu&#64;email.com"
             [class.error]="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched"
           >
           <div class="error-message" *ngIf="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched">
@@ -164,7 +164,7 @@
       <div class="info-grid">
         <div class="info-item">
           <h3>📧 Email</h3>
-          <p>info@showtime.com</p>
+          <p>info&#64;showtime.com</p>
         </div>
         <div class="info-item">
           <h3>📱 WhatsApp</h3>
