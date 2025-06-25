@@ -1,0 +1,95 @@
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Descubre los mejores eventos</h1>
+    <p class="hero-subtitle">Encuentra y reserva eventos increíbles en tu ciudad</p>
+    <div class="hero-buttons">
+      <button class="btn-primary" (click)="scrollToSection('eventos')">Explorar Eventos</button>
+      <button class="btn-secondary" routerLink="/contacto">Contactar</button>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="floating-cards">
+      <div class="card">🎸</div>
+      <div class="card">🎭</div>
+      <div class="card">⚽</div>
+    </div>
+  </div>
+</section>
+
+<!-- Estadísticas -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item" *ngFor="let stat of estadisticas">
+        <div class="stat-number">{{ stat.numero }}</div>
+        <div class="stat-description">{{ stat.descripcion }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Eventos Destacados -->
+<section id="eventos" class="events-section">
+  <div class="container">
+    <h2 class="section-title">Eventos Destacados</h2>
+    <p class="section-subtitle">Los eventos más populares de esta temporada</p>
+    
+    <div class="events-grid">
+      <div class="event-card" *ngFor="let evento of eventosDestacados">
+        <div class="event-image">
+          <span class="event-icon">{{ evento.imagen }}</span>
+        </div>
+        <div class="event-content">
+          <div class="event-category">{{ evento.categoria }}</div>
+          <h3 class="event-title">{{ evento.titulo }}</h3>
+          <div class="event-details">
+            <p class="event-date">📅 {{ evento.fecha }}</p>
+            <p class="event-location">📍 {{ evento.lugar }}</p>
+            <p class="event-price">💰 {{ evento.precio }}</p>
+          </div>
+          <button class="btn-event" (click)="verEvento(evento.id)">
+            Ver Detalles
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categorías -->
+<section class="categories-section">
+  <div class="container">
+    <h2 class="section-title">Explora por Categoría</h2>
+    <p class="section-subtitle">Encuentra eventos que te interesen</p>
+    
+    <div class="categories-grid">
+      <div 
+        class="category-card" 
+        *ngFor="let categoria of categorias"
+        (click)="explorarCategoria(categoria.nombre)"
+        [style.background]="categoria.color + '20'"
+        [style.border-color]="categoria.color"
+      >
+        <div class="category-icon" [style.color]="categoria.color">
+          {{ categoria.icono }}
+        </div>
+        <h3 class="category-name">{{ categoria.nombre }}</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <h2>¿Listo para vivir experiencias increíbles?</h2>
+      <p>Únete a miles de personas que ya han descubierto eventos únicos con iShowTime</p>
+      <div class="cta-buttons">
+        <button class="btn-primary" routerLink="/register">Crear Cuenta</button>
+        <button class="btn-secondary" routerLink="/contacto">Más Información</button>
+      </div>
+    </div>
+  </div>
+</section> 
