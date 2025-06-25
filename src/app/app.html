@@ -5,10 +5,10 @@
     </div>
     <nav class="main-nav">
         <ul>
-            <li><a routerLink="/">Inicio</a></li>
+            <li><a routerLink="/inicio" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
             <li><a href="#events">Eventos</a></li>
-            <li><a routerLink="/nosotros">Nosotros</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li><a routerLink="/nosotros" routerLinkActive="active">Nosotros</a></li>
+            <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
         </ul>
     </nav>
     <div class="auth-buttons">
@@ -23,19 +23,27 @@
     <div class="footer-links">
         <h3>Enlaces rápidos</h3>
         <ul>
-            <li><a href="#">Acerca de nosotros</a></li>
+            <li><a routerLink="/nosotros">Acerca de nosotros</a></li>
+            <li><a routerLink="/contacto">Contacto</a></li>
             <li><a href="#">Términos y condiciones</a></li>
             <li><a href="#">Código de ética</a></li>
         </ul>
     </div>
     <div class="social-media">
         <h3>Síguenos en redes</h3>
-        <!-- Aquí irían los íconos/enlaces de redes sociales -->
+        <div class="social-icons">
+            <a href="#" class="social-icon">📘</a>
+            <a href="#" class="social-icon">📷</a>
+            <a href="#" class="social-icon">🐦</a>
+            <a href="#" class="social-icon">📺</a>
+        </div>
     </div>
     <div class="contact-info">
         <h3>Contacto</h3>
-        <p>info&#64;showtime.com</p>
-        <p>2023 ShowTime - Todos los derechos reservados</p>
-        <p><a href="#">Libro de reclamaciones</a></p>
+        <p>📧 info&#64;showtime.com</p>
+        <p>📱 +51 999 999 999</p>
+        <p>🕒 Lun-Vie: 9:00 AM - 6:00 PM</p>
+        <p>© 2023 ShowTime - Todos los derechos reservados</p>
+        <p><a href="https://www.gob.pe/libro-de-reclamaciones" target="_blank">📋 Libro de reclamaciones</a></p>
     </div>
 </footer>
