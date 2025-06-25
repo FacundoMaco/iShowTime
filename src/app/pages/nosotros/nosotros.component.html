@@ -1,0 +1,23 @@
+<div class="nosotros-bg">
+  <div class="nosotros-header">
+    <h1>Conoce al equipo</h1>
+    <p>Los desarrolladores detrás de iShowTime</p>
+  </div>
+
+  <div class="team-grid">
+    <article class="member-card" *ngFor="let member of teamMembers">
+      <div class="member-avatar">
+        <img [src]="member.imagen" [alt]="'Foto de ' + member.nombre" loading="lazy" />
+      </div>
+      <div class="member-info">
+        <h3>{{ member.nombre }}</h3>
+        <p class="member-role" *ngIf="member.rol">{{ member.rol }}</p>
+      </div>
+    </article>
+  </div>
+
+  <section class="about-section">
+    <h2>Sobre iShowTime</h2>
+    <p>Una plataforma universitaria diseñada para conectar estudiantes y facilitar la organización de eventos académicos y sociales. Desarrollada con las mejores prácticas de Angular 17 y diseño moderno.</p>
+  </section>
+</div> 

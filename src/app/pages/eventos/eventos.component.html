@@ -1,0 +1,81 @@
+<div class="eventos-bg">
+  <div class="eventos-header">
+    <h1>Eventos</h1>
+    <button class="btn-main" (click)="openCreateModal()">Crear evento</button>
+  </div>
+
+  <div class="eventos-section">
+    <h2>Todos los eventos</h2>
+    <div class="eventos-list">
+      <div class="evento-card" *ngFor="let evento of eventos">
+        <div class="evento-info">
+          <h3>{{ evento.titulo }}</h3>
+          <p class="evento-meta">{{ evento.fecha | date:'mediumDate' }} · {{ evento.lugar }}</p>
+        </div>
+        <div class="evento-actions">
+          <button class="btn-link" (click)="toggleAsistencia(evento)">
+            {{ isAsistiendo(evento) ? 'Cancelar asistencia' : 'Asistir' }}
+          </button>
+          <button class="btn-link" (click)="openEditModal(evento)">Editar</button>
+          <button class="btn-link btn-danger" (click)="eliminarEvento(evento)">Eliminar</button>
+          <button class="btn-link" (click)="openDetalleModal(evento)">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eventos-section" *ngIf="eventosAsistidos.length > 0">
+    <h2>Mis eventos</h2>
+    <div class="eventos-list">
+      <div class="evento-card" *ngFor="let evento of eventosAsistidos">
+        <div class="evento-info">
+          <h3>{{ evento.titulo }}</h3>
+          <p class="evento-meta">{{ evento.fecha | date:'mediumDate' }} · {{ evento.lugar }}</p>
+        </div>
+        <div class="evento-actions">
+          <button class="btn-link btn-danger" (click)="toggleAsistencia(evento)">Cancelar asistencia</button>
+          <button class="btn-link" (click)="openDetalleModal(evento)">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Crear/Editar Evento -->
+  <div class="modal-backdrop" *ngIf="showFormModal" (click)="closeFormModal()"></div>
+  <div class="modal-content" *ngIf="showFormModal">
+    <h2>{{ editando ? 'Editar evento' : 'Crear evento' }}</h2>
+    <form [formGroup]="eventoForm" (ngSubmit)="guardarEvento()">
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input id="titulo" formControlName="titulo" maxlength="40" required />
+      </div>
+      <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input id="fecha" type="date" formControlName="fecha" required />
+      </div>
+      <div class="form-group">
+        <label for="lugar">Lugar</label>
+        <input id="lugar" formControlName="lugar" maxlength="40" required />
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" formControlName="descripcion" maxlength="200" rows="3" placeholder="Breve descripción"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" (click)="closeFormModal()">Cancelar</button>
+        <button type="submit" [disabled]="eventoForm.invalid">Guardar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal Detalle Evento -->
+  <div class="modal-backdrop" *ngIf="showDetalleModal" (click)="closeDetalleModal()"></div>
+  <div class="modal-content modal-detalle" *ngIf="showDetalleModal">
+    <h2>{{ eventoDetalle?.titulo }}</h2>
+    <p class="evento-meta">{{ eventoDetalle?.fecha | date:'mediumDate' }} · {{ eventoDetalle?.lugar }}</p>
+    <p>{{ eventoDetalle?.descripcion }}</p>
+    <div class="modal-actions">
+      <button type="button" (click)="closeDetalleModal()">Cerrar</button>
+    </div>
+  </div>
+</div> 
