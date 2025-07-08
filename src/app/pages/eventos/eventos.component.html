@@ -12,7 +12,12 @@
     <div class="eventos-list">
       <div class="evento-card" *ngFor="let evento of eventos">
         <div class="evento-info">
-          <h3>{{ evento.titulo }}</h3>
+          <div class="evento-header">
+            <h3>{{ evento.titulo }}</h3>
+            <div class="sello-verificacion" *ngIf="evento.verificado" title="Evento oficial verificado">
+              <span class="icono-verificacion">✓</span>
+            </div>
+          </div>
           <p class="evento-meta">{{ evento.fecha | date:'mediumDate' }} · {{ evento.lugar }}</p>
         </div>
         <div class="evento-actions">
@@ -40,7 +45,12 @@
     <div class="eventos-list">
       <div class="evento-card" *ngFor="let evento of eventosAsistidos">
         <div class="evento-info">
-          <h3>{{ evento.titulo }}</h3>
+          <div class="evento-header">
+            <h3>{{ evento.titulo }}</h3>
+            <div class="sello-verificacion" *ngIf="evento.verificado" title="Evento oficial verificado">
+              <span class="icono-verificacion">✓</span>
+            </div>
+          </div>
           <p class="evento-meta">{{ evento.fecha | date:'mediumDate' }} · {{ evento.lugar }}</p>
         </div>
         <div class="evento-actions">
@@ -89,7 +99,13 @@
   <!-- Modal Detalle Evento -->
   <div class="modal-backdrop" *ngIf="showDetalleModal" (click)="closeDetalleModal()"></div>
   <div class="modal-content modal-detalle" *ngIf="showDetalleModal">
-    <h2>{{ eventoDetalle?.titulo }}</h2>
+    <div class="modal-header">
+      <h2>{{ eventoDetalle?.titulo }}</h2>
+      <div class="sello-verificacion-modal" *ngIf="eventoDetalle?.verificado" title="Evento oficial verificado">
+        <span class="icono-verificacion">✓</span>
+        <span class="texto-verificacion">Oficial</span>
+      </div>
+    </div>
     <p class="evento-meta">{{ eventoDetalle?.fecha | date:'mediumDate' }} · {{ eventoDetalle?.lugar }}</p>
     <p>{{ eventoDetalle?.descripcion }}</p>
     
