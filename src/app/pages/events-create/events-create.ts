@@ -15,6 +15,7 @@ interface EventForm {
   maxAttendees: number;
   contactEmail: string;
   contactPhone: string;
+  duration: string; // Nueva propiedad
 }
 
 @Component({
@@ -36,7 +37,8 @@ export class EventsCreate {
     price: '',
     maxAttendees: 50,
     contactEmail: '',
-    contactPhone: ''
+    contactPhone: '',
+    duration: '' // Inicializar
   };
 
   categories = [
@@ -55,6 +57,14 @@ export class EventsCreate {
   showError: boolean = false;
   errorMessage: string = '';
   isSubmitting: boolean = false;
+
+  // Mock de usuario autenticado
+  mockUser = {
+    name: 'Juan Pérez',
+    email: 'juan.perez@correo.com'
+  };
+
+  eventImage: string | null = null; // Para almacenar la imagen en base64
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -154,6 +164,8 @@ export class EventsCreate {
         const newEvent = {
           id: Date.now(),
           ...this.eventForm,
+          organizer: this.mockUser.name, // Usar el mockUser
+          image: this.eventImage, // Guardar la imagen
           status: 'active',
           createdAt: new Date().toISOString()
         };
@@ -171,6 +183,7 @@ export class EventsCreate {
         
         // Limpiar formulario
         this.resetForm();
+        this.eventImage = null;
         
         // Ocultar mensaje de éxito después de 3 segundos
         setTimeout(() => {
@@ -197,7 +210,8 @@ export class EventsCreate {
       price: '',
       maxAttendees: 50,
       contactEmail: '',
-      contactPhone: ''
+      contactPhone: '',
+      duration: ''
     };
   }
 
@@ -214,6 +228,18 @@ export class EventsCreate {
     // Asegurar que el precio tenga formato válido
     if (this.eventForm.price && !this.eventForm.price.includes('$') && this.eventForm.price !== 'Gratis' && this.eventForm.price !== 'Entrada Libre') {
       this.eventForm.price = '$' + this.eventForm.price;
+    }
+  }
+
+  // Método para manejar la imagen seleccionada
+  onImageSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.eventImage = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 } 

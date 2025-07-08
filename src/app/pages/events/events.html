@@ -26,7 +26,10 @@
   </div>
 
   <div class="events-grid">
-    <div class="event-card-lg" *ngFor="let event of mockEvents">
+    <div class="event-card-lg" *ngFor="let event of allEvents">
+      <div class="event-image-container" *ngIf="event.image">
+        <img [src]="event.image" alt="Imagen del evento" class="event-image" />
+      </div>
       <div class="event-category-tag" [ngClass]="event.category | lowercase">{{ event.category }}</div>
       <h3>{{ event.title }}</h3>
       <div class="event-detail-item">
@@ -34,9 +37,13 @@
       </div>
       <div class="event-detail-item">
         <i class="fas fa-clock"></i> <span>{{ event.time }}</span>
+        <span *ngIf="event.duration"> | {{ event.duration }}</span>
       </div>
       <div class="event-detail-item">
         <i class="fas fa-map-marker-alt"></i> <span>{{ event.location }}</span>
+      </div>
+      <div class="event-detail-item" *ngIf="event.organizer">
+        <i class="fas fa-user"></i> <span>Organizador: {{ event.organizer }}</span>
       </div>
       <div class="event-actions">
         <button class="details-btn" (click)="openEventDetails(event)">Ver detalles</button>

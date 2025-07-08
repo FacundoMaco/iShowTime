@@ -1,46 +1,26 @@
 import { Routes } from '@angular/router';
+import { Login } from './pages/login/login';
+import { Register } from './pages/register/register';
+import { Inicio } from './pages/inicio/inicio';
+import { Events } from './pages/events/events';
+import { About } from './pages/about/about';
+import { MyEvents } from './pages/my-events/my-events';
+import { ResetPassword } from './pages/reset-password/reset-password';
+import { RegisterConfirmation } from './pages/register-confirmation/register-confirmation';
+import { EventsPersonal } from './pages/events-personal/events-personal';
+import { EventsCreate } from './pages/events-create/events-create';
 
 export const routes: Routes = [
-  {
-    path: '',
-    loadComponent: () => import('./layouts/public-layout/public-layout.component').then(m => m.PublicLayoutComponent),
-    children: [
-      {
-        path: '',
-        loadComponent: () => import('./features/home/pages/home/home.component').then(m => m.HomeComponent),
-        title: 'ShowTime - Descubre Nuevas Experiencias'
-      },
-      {
-        path: 'eventos',
-        loadChildren: () => import('./features/events/events.routes').then(m => m.eventsRoutes)
-      },
-      {
-        path: 'auth',
-        loadChildren: () => import('./features/auth/auth.routes').then(m => m.authRoutes)
-      },
-      {
-        path: 'nosotros',
-        loadComponent: () => import('./features/home/pages/about/about.component').then(m => m.AboutComponent),
-        title: 'ShowTime - Nosotros'
-      },
-      {
-        path: 'contacto',
-        loadComponent: () => import('./features/home/pages/contact/contact.component').then(m => m.ContactComponent),
-        title: 'ShowTime - Contacto'
-      },
-      {
-        path: 'perfil',
-        loadComponent: () => import('./pages/profile/profile').then(m => m.Profile),
-        title: 'ShowTime - Mi Perfil'
-      },
-      {
-        path: 'configuracion-cuenta',
-        loadComponent: () => import('./pages/account-settings/account-settings.component').then(m => m.AccountSettingsComponent)
-      }
-    ]
-  },
-  {
-    path: '**',
-    redirectTo: ''
-  }
+    { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+    { path: 'inicio', component: Inicio },
+    { path: 'login', component: Login },
+    { path: 'register', component: Register },
+    { path: 'eventos', component: Events },
+    { path: 'nosotros', component: About },
+    { path: 'mis-eventos', component: MyEvents },
+    { path: 'reset-password', component: ResetPassword },
+    { path: 'register-confirmation', component: RegisterConfirmation },
+    { path: 'eventos-personales', component: EventsPersonal },
+    { path: 'crear-evento', component: EventsCreate },
+    { path: '**', redirectTo: 'inicio' }
 ];

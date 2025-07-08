@@ -11,6 +11,8 @@ interface Event {
   description: string;
   organizer: string;
   price: string;
+  image?: string; // Nueva propiedad para imagen
+  duration?: string; // Nueva propiedad para duración
 }
 
 @Component({
@@ -90,10 +92,21 @@ export class Events {
     }
   ];
 
+  allEvents: Event[] = [];
+
   showConfirmation: boolean = false;
   selectedEvent: Event | undefined;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      // Leer eventos publicados desde localStorage
+      const createdEvents: Event[] = JSON.parse(localStorage.getItem('createdEvents') || '[]');
+      // Mezclar los eventos mock y los creados
+      this.allEvents = [...createdEvents, ...this.mockEvents];
+    } else {
+      this.allEvents = [...this.mockEvents];
+    }
+  }
 
   attendEvent(eventId: number): void {
     if (isPlatformBrowser(this.platformId)) {

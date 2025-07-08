@@ -102,13 +102,26 @@
         </div>
 
         <div class="form-group">
-          <label for="organizer">Organizador *</label>
+          <label for="duration">Duración *</label>
           <input 
             type="text" 
-            id="organizer"
-            name="organizer"
-            [(ngModel)]="eventForm.organizer"
-            placeholder="Ej: Tech Innovators"
+            id="duration"
+            name="duration"
+            [(ngModel)]="eventForm.duration"
+            placeholder="Ej: 2 horas, 1 día"
+            required
+            class="form-control">
+        </div>
+
+        <!-- Campo para subir imagen -->
+        <div class="form-group">
+          <label for="image">Imagen del Evento *</label>
+          <input 
+            type="file" 
+            id="image"
+            name="image"
+            accept="image/*"
+            (change)="onImageSelected($event)"
             required
             class="form-control">
         </div>

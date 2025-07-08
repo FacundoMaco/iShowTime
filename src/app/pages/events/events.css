@@ -97,32 +97,50 @@ h1 {
   margin-top: 2rem;
 }
 
-.event-card-lg {
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  padding: 1.5rem;
+/* Imagen del evento */
+.event-image-container {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  background: #f4f4f4;
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  position: relative;
-  transition: all 0.3s ease;
+  align-items: center;
+  justify-content: center;
+}
+.event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
 }
 
+.event-card-lg {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  margin: 16px;
+  padding: 0 0 16px 0;
+  max-width: 350px;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s;
+}
 .event-card-lg:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
 }
 
 .event-category-tag {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: white;
+  margin: 0 0 8px 0;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+  background: #e0e7ff;
+  color: #3730a3;
+  align-self: flex-start;
 }
 
 .event-category-tag.academic { background-color: #3498db; }
@@ -133,12 +151,13 @@ h1 {
 .event-detail-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #666;
+  gap: 6px;
+  font-size: 15px;
+  margin: 4px 0;
 }
 
 .event-detail-item i {
-  color: var(--accent-color);
+  color: #3b82f6;
 }
 
 .event-actions {
@@ -206,6 +225,35 @@ h1 {
   .events-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .events-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .event-card-lg {
+    max-width: 100%;
+    min-width: 0;
+    margin: 12px 0;
+  }
+}
+@media (max-width: 600px) {
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+  .event-card-lg {
+    max-width: 100%;
+    min-width: 0;
+    margin: 10px 0;
+    border-radius: 10px;
+  }
+  .event-image-container {
+    height: 140px;
+    border-radius: 10px 10px 0 0;
+  }
+  .event-image {
+    border-radius: 10px 10px 0 0;
   }
 }
 
