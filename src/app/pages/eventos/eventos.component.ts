@@ -12,6 +12,7 @@ interface EventoLocal {
   fecha: string;
   lugar: string;
   descripcion: string;
+  verificado?: boolean;
 }
 
 @Component({
@@ -23,9 +24,11 @@ interface EventoLocal {
 })
 export class EventosComponent {
   eventos: EventoLocal[] = [
-    { id: 1, titulo: 'Feria Universitaria', fecha: '2024-07-10', lugar: 'Auditorio Central', descripcion: 'Una feria para conocer las actividades universitarias.' },
-    { id: 2, titulo: 'Hackathon 2024', fecha: '2024-08-05', lugar: 'Sala de Innovación', descripcion: 'Competencia de programación y tecnología.' },
-    { id: 3, titulo: 'Concierto de Primavera', fecha: '2024-09-15', lugar: 'Parque Principal', descripcion: 'Música en vivo para celebrar la primavera.' }
+    { id: 1, titulo: 'Feria Universitaria', fecha: '2024-07-10', lugar: 'Auditorio Central', descripcion: 'Una feria para conocer las actividades universitarias.', verificado: true },
+    { id: 2, titulo: 'Hackathon 2024', fecha: '2024-08-05', lugar: 'Sala de Innovación', descripcion: 'Competencia de programación y tecnología.', verificado: true },
+    { id: 3, titulo: 'Concierto de Primavera', fecha: '2024-09-15', lugar: 'Parque Principal', descripcion: 'Música en vivo para celebrar la primavera.', verificado: false },
+    { id: 4, titulo: 'Conferencia de Tecnología', fecha: '2024-10-20', lugar: 'Centro de Convenciones', descripcion: 'Evento oficial sobre las últimas tendencias en tecnología.', verificado: true },
+    { id: 5, titulo: 'Meetup de Desarrolladores', fecha: '2024-11-05', lugar: 'Café Tech', descripcion: 'Encuentro informal de desarrolladores para networking.', verificado: false }
   ];
   eventosAsistidos: EventoLocal[] = [];
 
@@ -169,6 +172,27 @@ export class EventosComponent {
 
   getEstadisticasEvento(eventoId: number) {
     return this.eventosService.getEstadisticasEvento(eventoId);
+  }
+
+  // Métodos para manejo de verificación
+  isEventoVerificado(evento: EventoLocal): boolean {
+    return evento.verificado === true;
+  }
+
+  getEventosVerificados(): EventoLocal[] {
+    return this.eventos.filter(evento => evento.verificado);
+  }
+
+  getEventosNoVerificados(): EventoLocal[] {
+    return this.eventos.filter(evento => !evento.verificado);
+  }
+
+  toggleVerificacion(evento: EventoLocal) {
+    // Solo para demostración - en producción esto sería manejado por admin
+    evento.verificado = !evento.verificado;
+    this.mostrarMensajeConfirmacion(
+      evento.verificado ? 'Evento marcado como verificado' : 'Verificación removida del evento'
+    );
   }
 
   private mostrarMensajeConfirmacion(mensaje: string) {
