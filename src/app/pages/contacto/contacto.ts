@@ -17,8 +17,8 @@ export class Contacto {
 
   constructor(private fb: FormBuilder) {
     this.contactoForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      email: ['', [Validators.required, Validators.email]],
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
       asunto: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       mensaje: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
       telefono: ['', [Validators.pattern(/^[0-9+\-\s()]+$/)]],
@@ -31,20 +31,26 @@ export class Contacto {
       this.enviando = true;
       this.erroresFormulario = [];
       
-      // Simular envío del formulario
-      setTimeout(() => {
-        console.log('Formulario enviado:', this.contactoForm.value);
-        this.mensajeEnviado = true;
-        this.enviando = false;
-        this.contactoForm.reset({
-          tipoConsulta: 'general'
-        });
-        
-        // Ocultar mensaje de éxito después de 5 segundos
+      try {
+        // Simular envío del formulario
         setTimeout(() => {
-          this.mensajeEnviado = false;
-        }, 5000);
-      }, 2000);
+          console.log('Formulario enviado:', this.contactoForm.value);
+          this.mensajeEnviado = true;
+          this.enviando = false;
+          this.contactoForm.reset({
+            tipoConsulta: 'general'
+          });
+          
+          // Ocultar mensaje de éxito después de 5 segundos
+          setTimeout(() => {
+            this.mensajeEnviado = false;
+          }, 5000);
+        }, 2000);
+      } catch (error) {
+        console.error('Error al enviar formulario:', error);
+        this.enviando = false;
+        this.erroresFormulario.push('Error al enviar el formulario. Por favor, inténtalo de nuevo.');
+      }
     } else {
       this.marcarCamposComoTocados();
       this.obtenerErroresFormulario();
@@ -81,9 +87,17 @@ export class Contacto {
               case 'maxlength':
                 this.erroresFormulario.push(`${this.getNombreCampo(key)} no puede exceder ${errores[errorKey].requiredLength} caracteres`);
                 break;
-              case 'pattern':
+                          case 'pattern':
+              if (key === 'nombre') {
+                this.erroresFormulario.push('El nombre solo puede contener letras y espacios');
+              } else if (key === 'email') {
+                this.erroresFormulario.push('Ingresa un email válido (ejemplo: usuario@dominio.com)');
+              } else if (key === 'telefono') {
+                this.erroresFormulario.push('Ingresa un teléfono válido (solo números, espacios, +, -, ())');
+              } else {
                 this.erroresFormulario.push(`${this.getNombreCampo(key)} tiene un formato inválido`);
-                break;
+              }
+              break;
             }
           });
         }
