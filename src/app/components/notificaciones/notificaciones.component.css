@@ -1,0 +1,495 @@
+/* Contenedor principal */
+.notificaciones-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Botón de notificaciones */
+.btn-notificaciones {
+  position: relative;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-notificaciones:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-notificaciones.tiene-notificaciones {
+  border-color: #dc3545;
+  background: #fff5f5;
+  animation: pulse-notificacion 2s infinite;
+}
+
+@keyframes pulse-notificacion {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.icono-notificacion {
+  font-size: 1.3rem;
+}
+
+/* Contador de notificaciones */
+.contador-notificaciones {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #dc3545;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Panel de notificaciones */
+.panel-notificaciones {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 350px;
+  max-height: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  animation: slideDown 0.3s ease-out;
+  font-family: 'Manrope', sans-serif;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header del panel */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: white;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-toggle-refresh,
+.btn-cerrar-panel {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.btn-toggle-refresh:hover,
+.btn-cerrar-panel:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-toggle-refresh.activo {
+  background: rgba(255, 255, 255, 0.3);
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Estados de carga y error */
+.estado-carga,
+.estado-error {
+  padding: 2rem;
+  text-align: center;
+  color: #6c757d;
+}
+
+.spinner-carga {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem auto;
+}
+
+.icono-error {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.btn-reintentar {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+}
+
+.btn-reintentar:hover {
+  background: #0056b3;
+}
+
+/* Lista de notificaciones */
+.lista-notificaciones {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Sin notificaciones */
+.sin-notificaciones {
+  padding: 2rem;
+  text-align: center;
+  color: #6c757d;
+}
+
+.icono-vacio {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.sin-notificaciones p {
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+
+.sin-notificaciones small {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* Item de notificación */
+.notificacion-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid #f8f9fa;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.notificacion-item:hover {
+  background: #f8f9fa;
+}
+
+.notificacion-item.leida {
+  opacity: 0.7;
+}
+
+.notificacion-item.leida .notificacion-titulo {
+  font-weight: 400;
+}
+
+/* Icono de notificación */
+.notificacion-icono {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+/* Contenido de notificación */
+.notificacion-contenido {
+  flex: 1;
+  min-width: 0;
+}
+
+.notificacion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.notificacion-titulo {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.notificacion-tiempo {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.notificacion-details {
+  margin-bottom: 0.8rem;
+}
+
+.notificacion-lugar,
+.notificacion-fecha {
+  margin: 0.2rem 0;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.notificacion-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-marcar-leida,
+.btn-eliminar {
+  background: none;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.btn-marcar-leida {
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+
+.btn-marcar-leida:hover {
+  background: #28a745;
+  color: white;
+}
+
+.btn-eliminar {
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.btn-eliminar:hover {
+  background: #dc3545;
+  color: white;
+}
+
+/* Tipos de notificación */
+.tipo-urgente {
+  border-left: 4px solid #dc3545;
+}
+
+.tipo-urgente .notificacion-icono {
+  color: #dc3545;
+}
+
+.tipo-hoy {
+  border-left: 4px solid #ffc107;
+}
+
+.tipo-hoy .notificacion-icono {
+  color: #ffc107;
+}
+
+.tipo-proximo {
+  border-left: 4px solid #17a2b8;
+}
+
+.tipo-proximo .notificacion-icono {
+  color: #17a2b8;
+}
+
+/* Acciones masivas */
+.acciones-masivas {
+  padding: 1rem 1.2rem;
+  border-top: 1px solid #e9ecef;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.btn-marcar-todas,
+.btn-solicitar-permisos {
+  background: none;
+  border: 1px solid #007bff;
+  color: #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.btn-marcar-todas:hover,
+.btn-solicitar-permisos:hover {
+  background: #007bff;
+  color: white;
+}
+
+/* Overlay */
+.overlay-notificaciones {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+/* Animaciones para notificaciones toast */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .panel-notificaciones {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    max-height: none;
+    border-radius: 0;
+    animation: slideInRight 0.3s ease-out;
+  }
+
+  .panel-header {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .panel-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .lista-notificaciones {
+    max-height: calc(100vh - 200px);
+  }
+
+  .notificacion-item {
+    padding: 1.2rem;
+  }
+
+  .notificacion-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .notificacion-tiempo {
+    align-self: flex-end;
+  }
+
+  .acciones-masivas {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-notificaciones {
+    width: 45px;
+    height: 45px;
+  }
+
+  .icono-notificacion {
+    font-size: 1.1rem;
+  }
+
+  .contador-notificaciones {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+  }
+
+  .notificacion-item {
+    padding: 1rem;
+  }
+
+  .notificacion-icono {
+    font-size: 1.3rem;
+  }
+
+  .notificacion-titulo {
+    font-size: 0.9rem;
+  }
+
+  .notificacion-lugar,
+  .notificacion-fecha {
+    font-size: 0.8rem;
+  }
+}
+
+/* Scrollbar personalizado */
+.lista-notificaciones::-webkit-scrollbar {
+  width: 6px;
+}
+
+.lista-notificaciones::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.lista-notificaciones::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.lista-notificaciones::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+} 

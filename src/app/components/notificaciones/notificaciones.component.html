@@ -1,0 +1,121 @@
+<!-- Botón de notificaciones con contador -->
+<div class="notificaciones-container">
+  <button 
+    class="btn-notificaciones" 
+    (click)="togglePanel()"
+    [class.tiene-notificaciones]="contadorNoLeidas > 0">
+    <span class="icono-notificacion">🔔</span>
+    <span class="contador-notificaciones" *ngIf="contadorNoLeidas > 0">
+      {{ contadorNoLeidas > 99 ? '99+' : contadorNoLeidas }}
+    </span>
+  </button>
+
+  <!-- Panel de notificaciones -->
+  <div class="panel-notificaciones" *ngIf="mostrarPanel">
+    <div class="panel-header">
+      <h3>Notificaciones</h3>
+      <div class="panel-actions">
+        <button 
+          class="btn-toggle-refresh" 
+          [class.activo]="autoRefresh"
+          (click)="toggleAutoRefresh()"
+          title="Auto-refresh">
+          🔄
+        </button>
+        <button 
+          class="btn-cerrar-panel" 
+          (click)="cerrarPanel()"
+          title="Cerrar">
+          ×
+        </button>
+      </div>
+    </div>
+
+    <!-- Estado de carga -->
+    <div class="estado-carga" *ngIf="cargando">
+      <div class="spinner-carga"></div>
+      <p>Cargando notificaciones...</p>
+    </div>
+
+    <!-- Estado de error -->
+    <div class="estado-error" *ngIf="error">
+      <span class="icono-error">⚠️</span>
+      <p>Error al cargar notificaciones</p>
+      <button class="btn-reintentar" (click)="cargarNotificaciones()">
+        Reintentar
+      </button>
+    </div>
+
+    <!-- Lista de notificaciones -->
+    <div class="lista-notificaciones" *ngIf="!cargando && !error">
+      <!-- Sin notificaciones -->
+      <div class="sin-notificaciones" *ngIf="notificaciones.length === 0">
+        <span class="icono-vacio">📭</span>
+        <p>No hay notificaciones</p>
+        <small>Te avisaremos cuando tengas eventos próximos</small>
+      </div>
+
+      <!-- Notificaciones -->
+      <div 
+        class="notificacion-item" 
+        *ngFor="let notificacion of notificaciones"
+        [class.leida]="notificacion.leida"
+        [class]="obtenerClaseTipo(notificacion.tipo)">
+        
+        <div class="notificacion-icono">
+          {{ obtenerIconoTipo(notificacion.tipo) }}
+        </div>
+        
+        <div class="notificacion-contenido">
+          <div class="notificacion-header">
+            <h4 class="notificacion-titulo">{{ notificacion.titulo }}</h4>
+            <span class="notificacion-tiempo">{{ notificacion.tiempoRestante }}</span>
+          </div>
+          
+          <div class="notificacion-details">
+            <p class="notificacion-lugar">📍 {{ notificacion.lugar }}</p>
+            <p class="notificacion-fecha">📅 {{ formatearFecha(notificacion.fecha) }}</p>
+          </div>
+          
+          <div class="notificacion-actions">
+            <button 
+              class="btn-marcar-leida" 
+              *ngIf="!notificacion.leida"
+              (click)="marcarComoLeida(notificacion)"
+              title="Marcar como leída">
+              ✓ Leída
+            </button>
+            <button 
+              class="btn-eliminar" 
+              (click)="eliminarNotificacion(notificacion)"
+              title="Eliminar notificación">
+              🗑️
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acciones masivas -->
+      <div class="acciones-masivas" *ngIf="notificaciones.length > 0">
+        <button 
+          class="btn-marcar-todas" 
+          *ngIf="contadorNoLeidas > 0"
+          (click)="marcarTodasComoLeidas()">
+          Marcar todas como leídas
+        </button>
+        <button 
+          class="btn-solicitar-permisos"
+          (click)="solicitarPermisosNotificacion()">
+          Activar notificaciones del navegador
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay para cerrar panel -->
+<div 
+  class="overlay-notificaciones" 
+  *ngIf="mostrarPanel"
+  (click)="cerrarPanel()">
+</div> 
