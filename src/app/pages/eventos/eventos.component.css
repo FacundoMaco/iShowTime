@@ -110,6 +110,185 @@ body, html {
   color: #e74c3c !important;
 }
 
+/* Botón de confirmación de asistencia */
+.btn-confirmar-asistencia {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+  font-family: 'Manrope', sans-serif;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-confirmar-asistencia:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2980b9, #1f5f8b);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+}
+
+.btn-confirmar-asistencia:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(52, 152, 219, 0.3);
+}
+
+.btn-confirmar-asistencia.confirmado {
+  background: linear-gradient(135deg, #27ae60, #229954);
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.btn-confirmar-asistencia.confirmado:hover:not(:disabled) {
+  background: linear-gradient(135deg, #229954, #1e8449);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+}
+
+.btn-confirmar-asistencia.loading {
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.btn-confirmar-asistencia:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-text {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn-loading {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Animaciones para mensajes de confirmación */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Estadísticas de confirmación */
+.estadisticas-confirmacion {
+  display: flex;
+  justify-content: space-around;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin: 1rem 0;
+  border: 1px solid #e9ecef;
+}
+
+.estadistica-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.estadistica-numero {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+.estadistica-label {
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Botón de confirmación en modal */
+.modal-confirmacion {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.btn-confirmar-asistencia-modal {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+  font-family: 'Manrope', sans-serif;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-confirmar-asistencia-modal:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2980b9, #1f5f8b);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.btn-confirmar-asistencia-modal.confirmado {
+  background: linear-gradient(135deg, #27ae60, #229954);
+  box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+}
+
+.btn-confirmar-asistencia-modal.confirmado:hover:not(:disabled) {
+  background: linear-gradient(135deg, #229954, #1e8449);
+  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+.btn-confirmar-asistencia-modal.loading {
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.btn-confirmar-asistencia-modal:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 /* Modales */
 .modal-backdrop {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -199,6 +378,23 @@ body, html {
   .eventos-list {
     gap: 0.7rem;
   }
+  
+  .btn-confirmar-asistencia {
+    min-width: 120px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .evento-actions {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  
+  .evento-actions .btn-confirmar-asistencia {
+    width: 100%;
+    order: -1;
+  }
+  
   .evento-card {
     min-width: 90vw;
     max-width: 99vw;

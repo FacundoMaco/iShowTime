@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { EventosService, Evento } from '../../eventos.service';
+import { UserService } from '../../user.service';
 
-interface Evento {
+interface EventoLocal {
   id: number;
   titulo: string;
   fecha: string;
@@ -13,26 +16,31 @@ interface Evento {
 @Component({
   selector: 'app-eventos',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './eventos.component.html',
   styleUrls: ['./eventos.component.css']
 })
 export class EventosComponent {
-  eventos: Evento[] = [
+  eventos: EventoLocal[] = [
     { id: 1, titulo: 'Feria Universitaria', fecha: '2024-07-10', lugar: 'Auditorio Central', descripcion: 'Una feria para conocer las actividades universitarias.' },
     { id: 2, titulo: 'Hackathon 2024', fecha: '2024-08-05', lugar: 'Sala de Innovación', descripcion: 'Competencia de programación y tecnología.' },
     { id: 3, titulo: 'Concierto de Primavera', fecha: '2024-09-15', lugar: 'Parque Principal', descripcion: 'Música en vivo para celebrar la primavera.' }
   ];
-  eventosAsistidos: Evento[] = [];
+  eventosAsistidos: EventoLocal[] = [];
 
   showFormModal = false;
   showDetalleModal = false;
   editando = false;
   eventoForm: FormGroup;
-  eventoDetalle: Evento | null = null;
-  eventoEditando: Evento | null = null;
+  eventoDetalle: EventoLocal | null = null;
+  eventoEditando: EventoLocal | null = null;
+  confirmandoAsistencia = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private eventosService: EventosService,
+    private userService: UserService
+  ) {
     this.eventoForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.maxLength(40)]],
       fecha: ['', Validators.required],
@@ -102,15 +110,93 @@ export class EventosComponent {
     this.eventoDetalle = null;
   }
 
-  toggleAsistencia(evento: Evento) {
-    if (this.isAsistiendo(evento)) {
-      this.eventosAsistidos = this.eventosAsistidos.filter(e => e.id !== evento.id);
-    } else {
-      this.eventosAsistidos.push(evento);
+  async confirmarAsistencia(evento: EventoLocal) {
+    const user = this.userService.getUser();
+    if (!user) {
+      alert('Debes iniciar sesión para confirmar asistencia');
+      return;
+    }
+
+    this.confirmandoAsistencia = true;
+    try {
+      const resultado = await this.eventosService.confirmarAsistencia(evento.id, user.id).toPromise();
+      if (resultado) {
+        this.eventosAsistidos.push(evento);
+        this.mostrarMensajeConfirmacion('¡Asistencia confirmada exitosamente!');
+      }
+    } catch (error) {
+      console.error('Error al confirmar asistencia:', error);
+      this.mostrarMensajeConfirmacion('Error al confirmar asistencia. Inténtalo de nuevo.');
+    } finally {
+      this.confirmandoAsistencia = false;
     }
   }
 
-  isAsistiendo(evento: Evento): boolean {
+  async cancelarAsistencia(evento: EventoLocal) {
+    const user = this.userService.getUser();
+    if (!user) {
+      alert('Debes iniciar sesión para cancelar asistencia');
+      return;
+    }
+
+    this.confirmandoAsistencia = true;
+    try {
+      const resultado = await this.eventosService.cancelarAsistencia(evento.id, user.id).toPromise();
+      if (resultado) {
+        this.eventosAsistidos = this.eventosAsistidos.filter(e => e.id !== evento.id);
+        this.mostrarMensajeConfirmacion('Asistencia cancelada exitosamente');
+      }
+    } catch (error) {
+      console.error('Error al cancelar asistencia:', error);
+      this.mostrarMensajeConfirmacion('Error al cancelar asistencia. Inténtalo de nuevo.');
+    } finally {
+      this.confirmandoAsistencia = false;
+    }
+  }
+
+  toggleAsistencia(evento: EventoLocal) {
+    if (this.isAsistiendo(evento)) {
+      this.cancelarAsistencia(evento);
+    } else {
+      this.confirmarAsistencia(evento);
+    }
+  }
+
+  isAsistiendo(evento: EventoLocal): boolean {
     return this.eventosAsistidos.some(e => e.id === evento.id);
+  }
+
+  getEstadisticasEvento(eventoId: number) {
+    return this.eventosService.getEstadisticasEvento(eventoId);
+  }
+
+  private mostrarMensajeConfirmacion(mensaje: string) {
+    // Crear un elemento temporal para mostrar el mensaje
+    const mensajeElement = document.createElement('div');
+    mensajeElement.className = 'mensaje-confirmacion';
+    mensajeElement.textContent = mensaje;
+    mensajeElement.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #2c3e50;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      z-index: 3000;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      animation: slideIn 0.3s ease-out;
+    `;
+    
+    document.body.appendChild(mensajeElement);
+    
+    setTimeout(() => {
+      mensajeElement.style.animation = 'slideOut 0.3s ease-in';
+      setTimeout(() => {
+        document.body.removeChild(mensajeElement);
+      }, 300);
+    }, 3000);
   }
 } 
