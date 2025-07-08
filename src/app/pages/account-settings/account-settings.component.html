@@ -1,0 +1,38 @@
+<div class="account-settings-container">
+  <h2>Información de la cuenta</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="accountForm">
+    <div class="form-section">
+      <label for="profileName">Nombre de perfil:</label>
+      <input id="profileName" formControlName="profileName" type="text" placeholder="Tu nombre de perfil" />
+    </div>
+    <div class="form-section">
+      <label for="userType">Tipo de usuario:</label>
+      <select id="userType" formControlName="userType">
+        <option value="organizador">Organizador</option>
+        <option value="usuario">Usuario</option>
+      </select>
+    </div>
+    <div class="form-section">
+      <label for="currentPassword">Contraseña actual:</label>
+      <input id="currentPassword" formControlName="currentPassword" type="password" placeholder="Contraseña actual" />
+    </div>
+    <div class="form-section">
+      <label for="newPassword">Nueva contraseña:</label>
+      <input id="newPassword" formControlName="newPassword" type="password" placeholder="Nueva contraseña" />
+    </div>
+    <div class="info-section">
+      <div>
+        <span>Miembro desde:</span>
+        <span class="info-value">{{ memberSince | date:'d ' + 'de' + ' MMMM ' + 'de' + ' y' }}</span>
+      </div>
+      <div>
+        <span>ID de usuario:</span>
+        <span class="info-value">{{ userId }}</span>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn-cancel" (click)="onCancel()">Cerrar</button>
+      <button type="submit" class="btn-save" [disabled]="accountForm.invalid">Guardar cambios</button>
+    </div>
+  </form>
+</div> 

@@ -1,0 +1,168 @@
+<div class="page-container">
+  <h1>BÚSQUEDA DE EVENTOS</h1>
+
+  <div class="search-filter-controls">
+    <div class="search-bar-container">
+      <input type="text" placeholder="Buscar eventos" class="search-input-lg">
+      <button class="search-button"><i class="fas fa-search"></i> Buscar</button>
+    </div>
+
+    <div class="filter-buttons-container">
+      <div class="category-filters">
+        <button class="filter-btn active"><i class="fas fa-filter"></i> Filtros</button>
+        <button class="filter-btn">Todos</button>
+        <button class="filter-btn">Académicos</button>
+        <button class="filter-btn">Culturales</button>
+        <button class="filter-btn">Deportivos</button>
+        <button class="filter-btn">Tecnología</button>
+      </div>
+      <div class="date-filters">
+        <button class="filter-btn"><i class="fas fa-calendar-alt"></i> Fechas</button>
+        <button class="filter-btn">Hoy</button>
+        <button class="filter-btn">Esta semana</button>
+        <button class="filter-btn">Esta mes</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="events-grid">
+    <div class="event-card-lg" *ngFor="let event of mockEvents">
+      <div class="event-category-tag" [ngClass]="event.category | lowercase">{{ event.category }}</div>
+      <h3>{{ event.title }}</h3>
+      <div class="event-detail-item">
+        <i class="fas fa-calendar-alt"></i> <span>{{ event.date }}</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-clock"></i> <span>{{ event.time }}</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-map-marker-alt"></i> <span>{{ event.location }}</span>
+      </div>
+      <div class="event-actions">
+        <button class="details-btn" (click)="openEventDetails(event)">Ver detalles</button>
+        <button class="save-btn" (click)="attendEvent(event.id)">Guardar</button>
+        <button class="attend-btn" (click)="attendEvent(event.id)">Asistiré</button>
+      </div>
+    </div>
+
+    <div class="event-card-lg">
+      <div class="event-category-tag academic">Académicos</div>
+      <h3>Charla sobre IA</h3>
+      <div class="event-detail-item">
+        <i class="fas fa-calendar-alt"></i> <span>15 de Mayo 2025</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-clock"></i> <span>1:00 PM - 5:00 PM</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-map-marker-alt"></i> <span>Campus - Monte</span>
+      </div>
+      <div class="event-actions">
+        <button class="details-btn">Ver detalles</button>
+        <button class="save-btn">Guardar</button>
+        <button class="reserve-btn">Reservar</button>
+      </div>
+    </div>
+
+    <div class="event-card-lg">
+      <div class="event-category-tag tech">tecnología</div>
+      <h3>Taller de ciberseguridad</h3>
+      <div class="event-detail-item">
+        <i class="fas fa-calendar-alt"></i> <span>15 de Mayo 2025</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-clock"></i> <span>10:00 AM - 6:00 PM</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-map-marker-alt"></i> <span>Campus - San isidro</span>
+      </div>
+      <div class="event-actions">
+        <button class="details-btn">Ver detalles</button>
+        <button class="save-btn">Guardar</button>
+        <button class="reserve-btn">Reservar</button>
+      </div>
+    </div>
+
+    <div class="event-card-lg">
+      <div class="event-category-tag cultural">Culturales</div>
+      <h3>Feria gastronómica</h3>
+      <div class="event-detail-item">
+        <i class="fas fa-calendar-alt"></i> <span>15 de Mayo 2025</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-clock"></i> <span>7:00 AM - 5:00 PM</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-map-marker-alt"></i> <span>Campus - San Miguel</span>
+      </div>
+      <div class="event-actions">
+        <button class="details-btn">Ver detalles</button>
+        <button class="save-btn">Guardar</button>
+        <button class="reserve-btn">Reservar</button>
+      </div>
+    </div>
+
+    <div class="event-card-lg">
+      <div class="event-category-tag sports">Deportivos</div>
+      <h3>Taller de basquet</h3>
+      <div class="event-detail-item">
+        <i class="fas fa-calendar-alt"></i> <span>15 de Mayo 2025</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-clock"></i> <span>7:00 PM - 9:00 PM</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-map-marker-alt"></i> <span>Campus - Monterrico</span>
+      </div>
+      <div class="event-actions">
+        <button class="details-btn">Ver detalles</button>
+        <button class="save-btn">Guardar</button>
+        <button class="reserve-btn">Reservar</button>
+      </div>
+    </div>
+
+    <div class="event-card-lg">
+      <div class="event-category-tag academic">Académicos</div>
+      <h3>Charla sobre literatura moderna</h3>
+      <div class="event-detail-item">
+        <i class="fas fa-calendar-alt"></i> <span>15 de Mayo 2025</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-clock"></i> <span>9:00 AM - 5:00 PM</span>
+      </div>
+      <div class="event-detail-item">
+        <i class="fas fa-map-marker-alt"></i> <span>Campus - San Miguel</span>
+      </div>
+      <div class="event-actions">
+        <button class="details-btn">Ver detalles</button>
+        <button class="save-btn">Guardar</button>
+        <button class="reserve-btn">Reservar</button>
+      </div>
+    </div>
+
+    <!-- Repite esta estructura para más eventos -->
+  </div>
+
+  <div class="attendance-confirmation" [ngClass]="{ show: showConfirmation }">
+    ¡Tu asistencia se ha guardado!
+  </div>
+
+  <div class="event-details-overlay" *ngIf="selectedEvent">
+    <div class="overlay-content">
+      <button class="close-btn" (click)="closeEventDetails()">&times;</button>
+      <h2 class="overlay-title">{{ selectedEvent.title }}</h2>
+      <p class="overlay-description">{{ selectedEvent.description }}</p>
+      <div class="overlay-detail-item">
+        <i class="fas fa-calendar-alt"></i> <span>Fecha: {{ selectedEvent.date }}</span>
+      </div>
+      <div class="overlay-detail-item">
+        <i class="fas fa-clock"></i> <span>Hora: {{ selectedEvent.time }}</span>
+      </div>
+      <div class="overlay-detail-item">
+        <i class="fas fa-map-marker-alt"></i> <span>Ubicación: {{ selectedEvent.location }}</span>
+      </div>
+      <p class="overlay-organizer">Organizado por: {{ selectedEvent.organizer }}</p>
+      <p class="overlay-price">Precio: {{ selectedEvent.price }}</p>
+    </div>
+  </div>
+</div> 

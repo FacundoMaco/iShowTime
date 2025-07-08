@@ -27,6 +27,15 @@ export const routes: Routes = [
         path: 'contacto',
         loadComponent: () => import('./features/home/pages/contact/contact.component').then(m => m.ContactComponent),
         title: 'ShowTime - Contacto'
+      },
+      {
+        path: 'perfil',
+        loadComponent: () => import('./pages/profile/profile').then(m => m.Profile),
+        title: 'ShowTime - Mi Perfil'
+      },
+      {
+        path: 'configuracion-cuenta',
+        loadComponent: () => import('./pages/account-settings/account-settings.component').then(m => m.AccountSettingsComponent)
       }
     ]
   },

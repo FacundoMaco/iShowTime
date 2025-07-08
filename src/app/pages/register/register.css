@@ -1,0 +1,270 @@
+/* Estilos para la página de registro */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: #f0f2f5;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  align-items: stretch;
+}
+
+.register-main {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.welcome-panel {
+  background-color: #e0f2f1;
+  padding: 5rem 3rem;
+  border-radius: 8px 0 0 8px;
+  text-align: center;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.welcome-content .waving-hand {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+    background-color: white;
+    border-radius: 50%;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.welcome-content h2 {
+    font-size: 2rem;
+    color: #004d40;
+    margin-bottom: 1rem;
+}
+
+.welcome-content p {
+    font-size: 1rem;
+    color: #00695c;
+    max-width: 320px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+
+.register-form-panel {
+  background-color: #fff;
+  padding: 2.5rem 3.5rem;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  max-width: 500px;
+}
+
+.register-form-container {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.form-header {
+    margin-bottom: 2rem;
+}
+
+.form-header .form-icon {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    border: 2.5px solid #007bff;
+    border-radius: 50%;
+    position: relative;
+}
+
+.form-header .form-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    background-color: #007bff;
+    border-radius: 50%;
+}
+
+
+.form-header h3 {
+    margin-top: 1rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #343a40;
+  font-weight: 500;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6c757d;
+}
+
+.btn-submit {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+}
+
+.social-register {
+  margin-top: 2rem;
+}
+
+.separator {
+  position: relative;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #6c757d;
+}
+
+.separator::before, .separator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: #e9ecef;
+}
+
+.separator::before {
+  left: 0;
+}
+
+.separator::after {
+  right: 0;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.social-buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-facebook {
+  background-color: #3b5998;
+  color: white;
+  border: 1px solid #3b5998;
+}
+
+.btn-facebook:hover {
+  background-color: #2d4373;
+}
+
+.btn-google {
+  background-color: #db4437;
+  color: white;
+  border: 1px solid #db4437;
+}
+
+.btn-google:hover {
+  background-color: #c0392b;
+}
+
+.social-buttons button img {
+  width: 20px;
+  height: 20px;
+}
+
+.login-link {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: #6c757d;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .register-main {
+    flex-direction: column;
+  }
+
+  .welcome-panel,
+  .register-form-panel {
+    border-radius: 8px;
+    width: 100%;
+    max-width: 100%;
+    padding: 2rem;
+  }
+
+  .welcome-panel {
+    margin-bottom: 1rem;
+  }
+}
