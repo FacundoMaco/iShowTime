@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { EventosService, Evento } from '../../eventos.service';
 import { UserService } from '../../user.service';
 
@@ -16,7 +17,7 @@ interface EventoLocal {
 @Component({
   selector: 'app-eventos',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   templateUrl: './eventos.component.html',
   styleUrls: ['./eventos.component.css']
 })

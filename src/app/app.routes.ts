@@ -5,6 +5,7 @@ import { Inicio } from './pages/inicio/inicio';
 import { Nosotros } from './pages/nosotros/nosotros';
 import { Contacto } from './pages/contacto/contacto';
 import { EventosComponent } from './pages/eventos/eventos.component';
+import { HistorialComponent } from './pages/historial/historial.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -13,5 +14,6 @@ export const routes: Routes = [
     { path: 'register', component: Register },
     { path: 'nosotros', component: Nosotros },
     { path: 'contacto', component: Contacto },
-    { path: 'eventos', component: EventosComponent }
+    { path: 'eventos', component: EventosComponent },
+    { path: 'historial', component: HistorialComponent }
 ];

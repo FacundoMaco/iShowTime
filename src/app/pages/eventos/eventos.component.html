@@ -1,7 +1,10 @@
 <div class="eventos-bg">
   <div class="eventos-header">
     <h1>Eventos</h1>
-    <button class="btn-main" (click)="openCreateModal()">Crear evento</button>
+    <div class="header-actions">
+      <button class="btn-secondary" routerLink="/historial">📋 Mi Historial</button>
+      <button class="btn-main" (click)="openCreateModal()">Crear evento</button>
+    </div>
   </div>
 
   <div class="eventos-section">
