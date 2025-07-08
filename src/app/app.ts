@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { AuthService } from './services/auth.service';
+import { Profile } from './pages/profile/profile';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, CommonModule, AsyncPipe],
+  imports: [RouterOutlet, RouterLink, CommonModule, AsyncPipe, Profile],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -18,8 +18,14 @@
                 <a class="nav-link" routerLink="/nosotros">Nosotros</a>
                 <a href="/mis-eventos" class="nav-link">Mis Eventos</a>
                 <div class="nav-auth-links">
-                    <a class="login-link" routerLink="/login">Iniciar sesión</a>
-                    <a class="register-link" routerLink="/register">Registrarse</a>
+                    <!-- Mostrar perfil si está logueado, sino mostrar links de auth -->
+                    <ng-container *ngIf="isLoggedIn$ | async; else authLinks">
+                        <app-profile></app-profile>
+                    </ng-container>
+                    <ng-template #authLinks>
+                        <a class="login-link" routerLink="/login">Iniciar sesión</a>
+                        <a class="register-link" routerLink="/register">Registrarse</a>
+                    </ng-template>
                 </div>
             </div>
         </div>

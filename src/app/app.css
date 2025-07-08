@@ -687,4 +687,26 @@ button:hover {
 /* Espaciado entre elementos */
 .section-spacing {
     margin-bottom: 3rem;
+}
+
+/* Estilos para el slidebar del perfil */
+body.slidebar-open {
+    overflow: hidden;
+}
+
+body.slidebar-open .navbar {
+    z-index: 998;
+}
+
+/* Ajustes para el botón del perfil en la navbar */
+.nav-auth-links app-profile {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive para el botón del perfil */
+@media (max-width: 768px) {
+    .nav-auth-links app-profile {
+        margin-top: 0.5rem;
+    }
 } 
