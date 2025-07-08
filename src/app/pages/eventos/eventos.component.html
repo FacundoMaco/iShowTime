@@ -13,8 +13,16 @@
           <p class="evento-meta">{{ evento.fecha | date:'mediumDate' }} · {{ evento.lugar }}</p>
         </div>
         <div class="evento-actions">
-          <button class="btn-link" (click)="toggleAsistencia(evento)">
-            {{ isAsistiendo(evento) ? 'Cancelar asistencia' : 'Asistir' }}
+          <button 
+            class="btn-confirmar-asistencia" 
+            [class.confirmado]="isAsistiendo(evento)"
+            [class.loading]="confirmandoAsistencia"
+            (click)="toggleAsistencia(evento)"
+            [disabled]="confirmandoAsistencia">
+            <span class="btn-text">
+              {{ isAsistiendo(evento) ? '✓ Confirmado' : 'Confirmar asistencia' }}
+            </span>
+            <span class="btn-loading" *ngIf="confirmandoAsistencia">...</span>
           </button>
           <button class="btn-link" (click)="openEditModal(evento)">Editar</button>
           <button class="btn-link btn-danger" (click)="eliminarEvento(evento)">Eliminar</button>
@@ -33,7 +41,14 @@
           <p class="evento-meta">{{ evento.fecha | date:'mediumDate' }} · {{ evento.lugar }}</p>
         </div>
         <div class="evento-actions">
-          <button class="btn-link btn-danger" (click)="toggleAsistencia(evento)">Cancelar asistencia</button>
+          <button 
+            class="btn-confirmar-asistencia confirmado" 
+            [class.loading]="confirmandoAsistencia"
+            (click)="toggleAsistencia(evento)"
+            [disabled]="confirmandoAsistencia">
+            <span class="btn-text">✓ Confirmado</span>
+            <span class="btn-loading" *ngIf="confirmandoAsistencia">...</span>
+          </button>
           <button class="btn-link" (click)="openDetalleModal(evento)">Ver detalles</button>
         </div>
       </div>
@@ -74,6 +89,34 @@
     <h2>{{ eventoDetalle?.titulo }}</h2>
     <p class="evento-meta">{{ eventoDetalle?.fecha | date:'mediumDate' }} · {{ eventoDetalle?.lugar }}</p>
     <p>{{ eventoDetalle?.descripcion }}</p>
+    
+    <!-- Estadísticas de confirmación -->
+    <div class="estadisticas-confirmacion" *ngIf="eventoDetalle">
+      <div class="estadistica-item">
+        <span class="estadistica-numero">{{ getEstadisticasEvento(eventoDetalle.id).confirmados }}</span>
+        <span class="estadistica-label">Confirmados</span>
+      </div>
+      <div class="estadistica-item">
+        <span class="estadistica-numero">{{ getEstadisticasEvento(eventoDetalle.id).total }}</span>
+        <span class="estadistica-label">Total</span>
+      </div>
+    </div>
+    
+    <!-- Botón de confirmación en modal -->
+    <div class="modal-confirmacion" *ngIf="eventoDetalle">
+      <button 
+        class="btn-confirmar-asistencia-modal" 
+        [class.confirmado]="isAsistiendo(eventoDetalle)"
+        [class.loading]="confirmandoAsistencia"
+        (click)="toggleAsistencia(eventoDetalle)"
+        [disabled]="confirmandoAsistencia">
+        <span class="btn-text">
+          {{ isAsistiendo(eventoDetalle) ? '✓ Asistencia Confirmada' : 'Confirmar mi asistencia' }}
+        </span>
+        <span class="btn-loading" *ngIf="confirmandoAsistencia">...</span>
+      </button>
+    </div>
+    
     <div class="modal-actions">
       <button type="button" (click)="closeDetalleModal()">Cerrar</button>
     </div>
