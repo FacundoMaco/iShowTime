@@ -19,6 +19,25 @@ button {
     font-weight: bold;
 }
 
+/* Mejora de contraste y focus visible en botones */
+button, .btn, .btn-enviar, .btn-limpiar, .btn-contacto {
+  color: #fff !important;
+  background-color: #0056b3 !important;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5em 1.2em;
+  font-weight: 600;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button:focus, .btn:focus, .btn-enviar:focus, .btn-limpiar:focus, .btn-contacto:focus {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px #ffbf4744;
+}
+button:hover, .btn:hover, .btn-enviar:hover, .btn-limpiar:hover, .btn-contacto:hover {
+  background-color: #003d80 !important;
+}
+
 .site-header {
     background-color: #ffffff; 
     padding: 15px 5%;
