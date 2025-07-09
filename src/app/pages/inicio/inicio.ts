@@ -65,11 +65,11 @@ export class Inicio {
 
   verEvento(eventoId: number) {
     console.log('Ver evento:', eventoId);
-    // Aquí se implementaría la navegación al detalle del evento
+    // Aquí se implementaría la navegación al detalle del evento.
   }
 
   explorarCategoria(categoria: string) {
     console.log('Explorar categoría:', categoria);
-    // Aquí se implementaría el filtrado por categoría
+    // Aquí se implementaría el filtrado por categoría.
   }
 } 
