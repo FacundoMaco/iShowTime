@@ -1,0 +1,165 @@
+<div class="historial-bg">
+  <div class="historial-header">
+    <h1>Mi Historial de Eventos</h1>
+    <div class="header-actions">
+      <button class="btn-secondary" (click)="toggleFiltros()">
+        {{ mostrarFiltros ? 'Ocultar' : 'Mostrar' }} Filtros
+      </button>
+      <button class="btn-export" (click)="exportarHistorial()">
+        📊 Exportar CSV
+      </button>
+    </div>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="estadisticas-section" *ngIf="!cargandoEstadisticas">
+    <div class="estadistica-card">
+      <div class="estadistica-numero">{{ estadisticas.totalAsistidos }}</div>
+      <div class="estadistica-label">Eventos Asistidos</div>
+    </div>
+    <div class="estadistica-card">
+      <div class="estadistica-numero">{{ estadisticas.totalCancelados }}</div>
+      <div class="estadistica-label">Eventos Cancelados</div>
+    </div>
+    <div class="estadistica-card">
+      <div class="estadistica-numero">{{ estadisticas.totalPendientes }}</div>
+      <div class="estadistica-label">Eventos Pendientes</div>
+    </div>
+    <div class="estadistica-card">
+      <div class="estadistica-numero">{{ historial.length }}</div>
+      <div class="estadistica-label">En esta página</div>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filtros-section" *ngIf="mostrarFiltros">
+    <div class="filtros-container">
+      <div class="filtro-grupo">
+        <label for="busqueda">Buscar eventos:</label>
+        <input 
+          id="busqueda" 
+          type="text" 
+          placeholder="Buscar por título, lugar o descripción..."
+          [(ngModel)]="terminoBusqueda"
+          (keyup.enter)="buscarEventos()"
+        />
+        <button class="btn-buscar" (click)="buscarEventos()">🔍 Buscar</button>
+      </div>
+      
+      <div class="filtro-grupo">
+        <label for="fechaInicio">Fecha inicio:</label>
+        <input 
+          id="fechaInicio" 
+          type="date" 
+          [(ngModel)]="fechaInicio"
+        />
+      </div>
+      
+      <div class="filtro-grupo">
+        <label for="fechaFin">Fecha fin:</label>
+        <input 
+          id="fechaFin" 
+          type="date" 
+          [(ngModel)]="fechaFin"
+        />
+        <button class="btn-filtrar" (click)="filtrarPorFecha()">📅 Filtrar</button>
+      </div>
+      
+      <button class="btn-limpiar" (click)="limpiarFiltros()">
+        🗑️ Limpiar Filtros
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista de Historial -->
+  <div class="historial-section">
+    <div class="historial-header-list">
+      <h2>Eventos Asistidos</h2>
+      <div class="historial-info">
+        <span *ngIf="totalEventos > 0">
+          Mostrando {{ (paginaActual - 1) * porPagina + 1 }} - 
+          {{ Math.min(paginaActual * porPagina, totalEventos) }} 
+          de {{ totalEventos }} eventos
+        </span>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-container" *ngIf="cargando">
+      <div class="loading-spinner"></div>
+      <p>Cargando historial...</p>
+    </div>
+
+    <!-- Sin resultados -->
+    <div class="sin-resultados" *ngIf="sinResultados && !cargando">
+      <div class="sin-resultados-icon">📋</div>
+      <h3>No hay eventos en tu historial</h3>
+      <p>Cuando confirmes asistencia a eventos, aparecerán aquí.</p>
+    </div>
+
+    <!-- Lista de eventos -->
+    <div class="historial-list" *ngIf="!cargando && !sinResultados">
+      <div class="evento-historial-card" *ngFor="let evento of historial">
+        <div class="evento-info">
+          <div class="evento-header">
+            <h3>{{ evento.titulo }}</h3>
+            <span class="estado-badge" [class]="obtenerEstadoClase(evento.estado)">
+              {{ obtenerEstadoTexto(evento.estado) }}
+            </span>
+          </div>
+          
+          <div class="evento-details">
+            <div class="evento-meta">
+              <span class="meta-item">
+                📅 {{ formatearFecha(evento.fecha) }}
+              </span>
+              <span class="meta-item">
+                📍 {{ evento.lugar }}
+              </span>
+              <span class="meta-item">
+                ⏰ Confirmado: {{ formatearFecha(evento.fechaAsistencia) }}
+              </span>
+            </div>
+            
+            <p class="evento-descripcion" *ngIf="evento.descripcion">
+              {{ evento.descripcion }}
+            </p>
+          </div>
+        </div>
+        
+        <div class="evento-actions">
+          <button class="btn-link" (click)="verDetalles(evento)">
+            Ver detalles
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paginación -->
+    <div class="paginacion" *ngIf="totalPaginas > 1 && !cargando">
+      <button 
+        class="btn-pagina" 
+        [disabled]="paginaActual === 1"
+        (click)="cambiarPagina(paginaActual - 1)">
+        ← Anterior
+      </button>
+      
+      <div class="paginas-numeros">
+        <button 
+          class="btn-pagina" 
+          *ngFor="let pagina of obtenerPaginas()"
+          [class.activa]="pagina === paginaActual"
+          (click)="cambiarPagina(pagina)">
+          {{ pagina }}
+        </button>
+      </div>
+      
+      <button 
+        class="btn-pagina" 
+        [disabled]="paginaActual === totalPaginas"
+        (click)="cambiarPagina(paginaActual + 1)">
+        Siguiente →
+      </button>
+    </div>
+  </div>
+</div> 

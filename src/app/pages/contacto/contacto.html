@@ -1,13 +1,13 @@
-<section class="contacto-section">
+<section class="contacto-section" role="main" aria-labelledby="contacto-titulo">
   <div class="container">
-    <h1>Contáctanos</h1>
+    <h1 id="contacto-titulo">Contáctanos</h1>
     <p class="subtitle">Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos pronto.</p>
     
     <!-- Formulario de contacto -->
     <div class="form-container">
-      <form [formGroup]="contactoForm" (ngSubmit)="onSubmit()" class="contact-form">
+      <form [formGroup]="contactoForm" (ngSubmit)="onSubmit()" class="contact-form" role="form" aria-labelledby="contacto-titulo">
         <!-- Errores generales del formulario -->
-        <div class="errores-generales" *ngIf="erroresFormulario.length > 0">
+        <div class="errores-generales" *ngIf="erroresFormulario.length > 0" role="alert" aria-live="polite">
           <h4>Por favor corrige los siguientes errores:</h4>
           <ul>
             <li *ngFor="let error of erroresFormulario">{{ error }}</li>
@@ -15,15 +15,19 @@
         </div>
 
         <div class="form-group">
-          <label for="nombre">Nombre completo *</label>
+          <label for="nombre" id="nombre-label">Nombre completo <span aria-label="campo requerido">*</span></label>
           <input 
             type="text" 
             id="nombre" 
             formControlName="nombre" 
             placeholder="Tu nombre completo"
             [class.error]="contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched"
+            aria-labelledby="nombre-label"
+            aria-describedby="nombre-error"
+            aria-required="true"
+            autocomplete="name"
           >
-          <div class="error-message" *ngIf="contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched">
+          <div class="error-message" id="nombre-error" *ngIf="contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched" role="alert">
             <span *ngIf="contactoForm.get('nombre')?.errors?.['required']">El nombre es requerido</span>
             <span *ngIf="contactoForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres</span>
             <span *ngIf="contactoForm.get('nombre')?.errors?.['maxlength']">El nombre no puede exceder 50 caracteres</span>
@@ -31,41 +35,52 @@
         </div>
 
         <div class="form-group">
-          <label for="email">Email *</label>
+          <label for="email" id="email-label">Email <span aria-label="campo requerido">*</span></label>
           <input 
             type="email" 
             id="email" 
             formControlName="email" 
             placeholder="tu&#64;email.com"
             [class.error]="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched"
+            aria-labelledby="email-label"
+            aria-describedby="email-error"
+            aria-required="true"
+            autocomplete="email"
           >
-          <div class="error-message" *ngIf="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched">
+          <div class="error-message" id="email-error" *ngIf="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched" role="alert">
             <span *ngIf="contactoForm.get('email')?.errors?.['required']">El email es requerido</span>
             <span *ngIf="contactoForm.get('email')?.errors?.['email']">Ingresa un email válido</span>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="telefono">Teléfono (opcional)</label>
+          <label for="telefono" id="telefono-label">Teléfono (opcional)</label>
           <input 
             type="tel" 
             id="telefono" 
             formControlName="telefono" 
             placeholder="+51 999 999 999"
             [class.error]="contactoForm.get('telefono')?.invalid && contactoForm.get('telefono')?.touched"
+            aria-labelledby="telefono-label"
+            aria-describedby="telefono-error"
+            autocomplete="tel"
           >
-          <div class="error-message" *ngIf="contactoForm.get('telefono')?.invalid && contactoForm.get('telefono')?.touched">
+          <div class="error-message" id="telefono-error" *ngIf="contactoForm.get('telefono')?.invalid && contactoForm.get('telefono')?.touched" role="alert">
             <span *ngIf="contactoForm.get('telefono')?.errors?.['pattern']">Ingresa un teléfono válido</span>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="tipoConsulta">Tipo de consulta *</label>
+          <label for="tipoConsulta" id="tipoConsulta-label">Tipo de consulta <span aria-label="campo requerido">*</span></label>
           <select 
             id="tipoConsulta" 
             formControlName="tipoConsulta"
             [class.error]="contactoForm.get('tipoConsulta')?.invalid && contactoForm.get('tipoConsulta')?.touched"
+            aria-labelledby="tipoConsulta-label"
+            aria-describedby="tipoConsulta-error"
+            aria-required="true"
           >
+            <option value="">Selecciona un tipo de consulta</option>
             <option value="general">Consulta general</option>
             <option value="soporte">Soporte técnico</option>
             <option value="ventas">Ventas y precios</option>
@@ -73,21 +88,24 @@
             <option value="reclamo">Reclamo</option>
             <option value="otro">Otro</option>
           </select>
-          <div class="error-message" *ngIf="contactoForm.get('tipoConsulta')?.invalid && contactoForm.get('tipoConsulta')?.touched">
+          <div class="error-message" id="tipoConsulta-error" *ngIf="contactoForm.get('tipoConsulta')?.invalid && contactoForm.get('tipoConsulta')?.touched" role="alert">
             <span *ngIf="contactoForm.get('tipoConsulta')?.errors?.['required']">Selecciona un tipo de consulta</span>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="asunto">Asunto *</label>
+          <label for="asunto" id="asunto-label">Asunto <span aria-label="campo requerido">*</span></label>
           <input 
             type="text" 
             id="asunto" 
             formControlName="asunto" 
             placeholder="¿En qué podemos ayudarte?"
             [class.error]="contactoForm.get('asunto')?.invalid && contactoForm.get('asunto')?.touched"
+            aria-labelledby="asunto-label"
+            aria-describedby="asunto-error"
+            aria-required="true"
           >
-          <div class="error-message" *ngIf="contactoForm.get('asunto')?.invalid && contactoForm.get('asunto')?.touched">
+          <div class="error-message" id="asunto-error" *ngIf="contactoForm.get('asunto')?.invalid && contactoForm.get('asunto')?.touched" role="alert">
             <span *ngIf="contactoForm.get('asunto')?.errors?.['required']">El asunto es requerido</span>
             <span *ngIf="contactoForm.get('asunto')?.errors?.['minlength']">El asunto debe tener al menos 5 caracteres</span>
             <span *ngIf="contactoForm.get('asunto')?.errors?.['maxlength']">El asunto no puede exceder 100 caracteres</span>
@@ -95,15 +113,18 @@
         </div>
 
         <div class="form-group">
-          <label for="mensaje">Mensaje *</label>
+          <label for="mensaje" id="mensaje-label">Mensaje <span aria-label="campo requerido">*</span></label>
           <textarea 
             id="mensaje" 
             formControlName="mensaje" 
             rows="5" 
             placeholder="Cuéntanos más detalles sobre tu consulta..."
             [class.error]="contactoForm.get('mensaje')?.invalid && contactoForm.get('mensaje')?.touched"
+            aria-labelledby="mensaje-label"
+            aria-describedby="mensaje-error"
+            aria-required="true"
           ></textarea>
-          <div class="error-message" *ngIf="contactoForm.get('mensaje')?.invalid && contactoForm.get('mensaje')?.touched">
+          <div class="error-message" id="mensaje-error" *ngIf="contactoForm.get('mensaje')?.invalid && contactoForm.get('mensaje')?.touched" role="alert">
             <span *ngIf="contactoForm.get('mensaje')?.errors?.['required']">El mensaje es requerido</span>
             <span *ngIf="contactoForm.get('mensaje')?.errors?.['minlength']">El mensaje debe tener al menos 10 caracteres</span>
             <span *ngIf="contactoForm.get('mensaje')?.errors?.['maxlength']">El mensaje no puede exceder 1000 caracteres</span>
@@ -115,6 +136,7 @@
             type="submit" 
             class="btn-enviar" 
             [disabled]="contactoForm.invalid || enviando"
+            aria-describedby="submit-status"
           >
             <span *ngIf="!enviando">Enviar Mensaje</span>
             <span *ngIf="enviando">Enviando...</span>
@@ -124,15 +146,17 @@
             class="btn-limpiar" 
             (click)="limpiarFormulario()"
             [disabled]="enviando"
+            aria-label="Limpiar todos los campos del formulario"
           >
             Limpiar Formulario
           </button>
         </div>
+        <div id="submit-status" class="sr-only" aria-live="polite"></div>
       </form>
     </div>
 
     <!-- Mensaje de éxito -->
-    <div class="mensaje-exito" *ngIf="mensajeEnviado">
+    <div class="mensaje-exito" *ngIf="mensajeEnviado" role="alert" aria-live="polite">
       <div class="exito-content">
         <h3>¡Mensaje enviado!</h3>
         <p>Gracias por contactarnos. Te responderemos pronto.</p>
@@ -143,16 +167,16 @@
     <div class="contacto-rapido">
       <h2>Contacto Rápido</h2>
       <div class="botones-contacto">
-        <button class="btn-contacto btn-whatsapp" (click)="abrirWhatsApp()">
-          <span class="icon">📱</span>
+        <button class="btn-contacto btn-whatsapp" (click)="abrirWhatsApp()" aria-label="Abrir WhatsApp para contacto directo">
+          <span class="icon" aria-hidden="true">📱</span>
           WhatsApp
         </button>
-        <button class="btn-contacto btn-email" (click)="enviarEmail()">
-          <span class="icon">✉️</span>
+        <button class="btn-contacto btn-email" (click)="enviarEmail()" aria-label="Enviar email directo">
+          <span class="icon" aria-hidden="true">✉️</span>
           Email Directo
         </button>
-        <button class="btn-contacto btn-reclamaciones" (click)="abrirLibroReclamaciones()">
-          <span class="icon">📋</span>
+        <button class="btn-contacto btn-reclamaciones" (click)="abrirLibroReclamaciones()" aria-label="Abrir libro de reclamaciones">
+          <span class="icon" aria-hidden="true">📋</span>
           Libro de Reclamaciones
         </button>
       </div>
@@ -163,15 +187,15 @@
       <h2>Información de Contacto</h2>
       <div class="info-grid">
         <div class="info-item">
-          <h3>📧 Email</h3>
+          <h3><span aria-hidden="true">📧</span> Email</h3>
           <p>info&#64;showtime.com</p>
         </div>
         <div class="info-item">
-          <h3>📱 WhatsApp</h3>
+          <h3><span aria-hidden="true">📱</span> WhatsApp</h3>
           <p>+51 999 999 999</p>
         </div>
         <div class="info-item">
-          <h3>🕒 Horario de Atención</h3>
+          <h3><span aria-hidden="true">🕒</span> Horario de Atención</h3>
           <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
         </div>
       </div>

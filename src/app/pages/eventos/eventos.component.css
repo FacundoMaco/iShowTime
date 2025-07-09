@@ -17,6 +17,35 @@ body, html {
   margin: 0 auto 2.5rem auto;
   padding: 0 1rem;
 }
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Manrope', sans-serif;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+  color: white;
+  text-decoration: none;
+}
 .eventos-header h1 {
   font-size: 2.2rem;
   font-weight: 800;
@@ -75,11 +104,21 @@ body, html {
   box-shadow: 0 8px 32px rgba(44,62,80,0.16);
   transform: translateY(-2px) scale(1.02);
 }
+.evento-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
 .evento-info h3 {
   font-size: 1.15rem;
   font-weight: 700;
   color: #2c3e50;
-  margin: 0 0 0.2rem 0;
+  margin: 0;
+  flex: 1;
+  line-height: 1.3;
 }
 .evento-meta {
   color: #7b8a99;
@@ -108,6 +147,284 @@ body, html {
 }
 .btn-danger {
   color: #e74c3c !important;
+}
+
+/* Sello de verificación */
+.sello-verificacion {
+  background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(29, 161, 242, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: help;
+}
+
+.sello-verificacion:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(29, 161, 242, 0.4);
+}
+
+.sello-verificacion::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.3;
+  animation: pulse-verificacion 2s infinite;
+}
+
+@keyframes pulse-verificacion {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.1;
+  }
+}
+
+.icono-verificacion {
+  font-size: 0.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* Sello de verificación en modal */
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-header h2 {
+  margin: 0;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.sello-verificacion-modal {
+  background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+  color: white;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(29, 161, 242, 0.3);
+  transition: all 0.3s ease;
+  cursor: help;
+}
+
+.sello-verificacion-modal:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(29, 161, 242, 0.4);
+}
+
+.sello-verificacion-modal .icono-verificacion {
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.texto-verificacion {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Botón de confirmación de asistencia */
+.btn-confirmar-asistencia {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+  font-family: 'Manrope', sans-serif;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-confirmar-asistencia:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2980b9, #1f5f8b);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+}
+
+.btn-confirmar-asistencia:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(52, 152, 219, 0.3);
+}
+
+.btn-confirmar-asistencia.confirmado {
+  background: linear-gradient(135deg, #27ae60, #229954);
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.btn-confirmar-asistencia.confirmado:hover:not(:disabled) {
+  background: linear-gradient(135deg, #229954, #1e8449);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+}
+
+.btn-confirmar-asistencia.loading {
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.btn-confirmar-asistencia:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-text {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn-loading {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Animaciones para mensajes de confirmación */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Estadísticas de confirmación */
+.estadisticas-confirmacion {
+  display: flex;
+  justify-content: space-around;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin: 1rem 0;
+  border: 1px solid #e9ecef;
+}
+
+.estadistica-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.estadistica-numero {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+.estadistica-label {
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Botón de confirmación en modal */
+.modal-confirmacion {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.btn-confirmar-asistencia-modal {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+  font-family: 'Manrope', sans-serif;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-confirmar-asistencia-modal:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2980b9, #1f5f8b);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.btn-confirmar-asistencia-modal.confirmado {
+  background: linear-gradient(135deg, #27ae60, #229954);
+  box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+}
+
+.btn-confirmar-asistencia-modal.confirmado:hover:not(:disabled) {
+  background: linear-gradient(135deg, #229954, #1e8449);
+  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+.btn-confirmar-asistencia-modal.loading {
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.btn-confirmar-asistencia-modal:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 /* Modales */
@@ -199,6 +516,23 @@ body, html {
   .eventos-list {
     gap: 0.7rem;
   }
+  
+  .btn-confirmar-asistencia {
+    min-width: 120px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .evento-actions {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  
+  .evento-actions .btn-confirmar-asistencia {
+    width: 100%;
+    order: -1;
+  }
+  
   .evento-card {
     min-width: 90vw;
     max-width: 99vw;
@@ -208,5 +542,54 @@ body, html {
     min-width: 200px;
     padding: 1rem 0.5rem;
     gap: 0.7rem;
+  }
+
+  /* Responsive para sello de verificación */
+  .sello-verificacion {
+    width: 22px;
+    height: 22px;
+  }
+
+  .icono-verificacion {
+    font-size: 0.75rem;
+  }
+
+  .sello-verificacion-modal {
+    padding: 0.4rem 0.8rem;
+  }
+
+  .sello-verificacion-modal .icono-verificacion {
+    font-size: 0.8rem;
+  }
+
+  .texto-verificacion {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sello-verificacion {
+    width: 20px;
+    height: 20px;
+  }
+
+  .icono-verificacion {
+    font-size: 0.7rem;
+  }
+
+  .sello-verificacion-modal {
+    padding: 0.3rem 0.6rem;
+  }
+
+  .sello-verificacion-modal .icono-verificacion {
+    font-size: 0.75rem;
+  }
+
+  .texto-verificacion {
+    font-size: 0.7rem;
+  }
+
+  .evento-header {
+    gap: 0.3rem;
   }
 } 

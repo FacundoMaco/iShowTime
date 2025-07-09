@@ -346,3 +346,66 @@ h1 {
     left: 1rem;
   }
 } 
+
+/* Estilos para elementos solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Mejorar estilos de focus para accesibilidad */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Estilos específicos para elementos con error en focus */
+input.error:focus,
+textarea.error:focus,
+select.error:focus {
+  outline-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+}
+
+/* Mejorar contraste para elementos requeridos */
+label span[aria-label="campo requerido"] {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Estilos para mensajes de error con mejor accesibilidad */
+.error-message[role="alert"] {
+  color: #dc3545;
+  font-weight: 500;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* Mejorar navegación por teclado */
+.btn-contacto:focus,
+.btn-enviar:focus,
+.btn-limpiar:focus {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* Estilos para elementos con aria-live */
+[aria-live="polite"] {
+  transition: opacity 0.3s ease;
+}
+
+/* Mejorar contraste para iconos decorativos */
+.icon[aria-hidden="true"] {
+  opacity: 0.8;
+} 

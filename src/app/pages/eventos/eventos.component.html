@@ -1,7 +1,10 @@
 <div class="eventos-bg">
   <div class="eventos-header">
     <h1>Eventos</h1>
-    <button class="btn-main" (click)="openCreateModal()">Crear evento</button>
+    <div class="header-actions">
+      <button class="btn-secondary" routerLink="/historial">📋 Mi Historial</button>
+      <button class="btn-main" (click)="openCreateModal()">Crear evento</button>
+    </div>
   </div>
 
   <div class="eventos-section">
@@ -9,16 +12,29 @@
     <div class="eventos-list">
       <div class="evento-card" *ngFor="let evento of eventos">
         <div class="evento-info">
-          <h3>{{ evento.titulo }}</h3>
+          <div class="evento-header">
+            <h3>{{ evento.titulo }}</h3>
+            <div class="sello-verificacion" *ngIf="evento.verificado" title="Evento oficial verificado">
+              <span class="icono-verificacion">✓</span>
+            </div>
+          </div>
           <p class="evento-meta">{{ evento.fecha | date:'mediumDate' }} · {{ evento.lugar }}</p>
         </div>
         <div class="evento-actions">
-          <button class="btn-link" (click)="toggleAsistencia(evento)">
-            {{ isAsistiendo(evento) ? 'Cancelar asistencia' : 'Asistir' }}
+          <button 
+            class="btn-confirmar-asistencia" 
+            [class.confirmado]="isAsistiendo(evento)"
+            [class.loading]="confirmandoAsistencia"
+            (click)="toggleAsistencia(evento)"
+            [disabled]="confirmandoAsistencia">
+            <span class="btn-text">
+              {{ isAsistiendo(evento) ? '✓ Confirmado' : 'Confirmar asistencia' }}
+            </span>
+            <span class="btn-loading" *ngIf="confirmandoAsistencia">...</span>
           </button>
-          <button class="btn-link" (click)="openEditModal(evento)">Editar</button>
-          <button class="btn-link btn-danger" (click)="eliminarEvento(evento)">Eliminar</button>
-          <button class="btn-link" (click)="openDetalleModal(evento)">Ver detalles</button>
+          <button class="btn-link" (click)="openEditModal(evento)" title="Editar información del evento">Editar</button>
+          <button class="btn-link btn-danger" (click)="eliminarEvento(evento)" title="Eliminar evento permanentemente">Eliminar</button>
+          <button class="btn-link" (click)="openDetalleModal(evento)" title="Ver información completa del evento">Ver detalles</button>
         </div>
       </div>
     </div>
@@ -29,12 +45,24 @@
     <div class="eventos-list">
       <div class="evento-card" *ngFor="let evento of eventosAsistidos">
         <div class="evento-info">
-          <h3>{{ evento.titulo }}</h3>
+          <div class="evento-header">
+            <h3>{{ evento.titulo }}</h3>
+            <div class="sello-verificacion" *ngIf="evento.verificado" title="Evento oficial verificado">
+              <span class="icono-verificacion">✓</span>
+            </div>
+          </div>
           <p class="evento-meta">{{ evento.fecha | date:'mediumDate' }} · {{ evento.lugar }}</p>
         </div>
         <div class="evento-actions">
-          <button class="btn-link btn-danger" (click)="toggleAsistencia(evento)">Cancelar asistencia</button>
-          <button class="btn-link" (click)="openDetalleModal(evento)">Ver detalles</button>
+          <button 
+            class="btn-confirmar-asistencia confirmado" 
+            [class.loading]="confirmandoAsistencia"
+            (click)="toggleAsistencia(evento)"
+            [disabled]="confirmandoAsistencia">
+            <span class="btn-text">✓ Confirmado</span>
+            <span class="btn-loading" *ngIf="confirmandoAsistencia">...</span>
+          </button>
+          <button class="btn-link" (click)="openDetalleModal(evento)" title="Ver información completa del evento">Ver detalles</button>
         </div>
       </div>
     </div>
@@ -47,19 +75,23 @@
     <form [formGroup]="eventoForm" (ngSubmit)="guardarEvento()">
       <div class="form-group">
         <label for="titulo">Título</label>
-        <input id="titulo" formControlName="titulo" maxlength="40" required />
+        <input id="titulo" formControlName="titulo" maxlength="40" required 
+               title="Nombre del evento (máximo 40 caracteres)" />
       </div>
       <div class="form-group">
         <label for="fecha">Fecha</label>
-        <input id="fecha" type="date" formControlName="fecha" required />
+        <input id="fecha" type="date" formControlName="fecha" required 
+               title="Fecha y hora del evento" />
       </div>
       <div class="form-group">
         <label for="lugar">Lugar</label>
-        <input id="lugar" formControlName="lugar" maxlength="40" required />
+        <input id="lugar" formControlName="lugar" maxlength="40" required 
+               title="Ubicación donde se realizará el evento" />
       </div>
       <div class="form-group">
         <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" formControlName="descripcion" maxlength="200" rows="3" placeholder="Breve descripción"></textarea>
+        <textarea id="descripcion" formControlName="descripcion" maxlength="200" rows="3" 
+                  placeholder="Breve descripción" title="Descripción detallada del evento (máximo 200 caracteres)"></textarea>
       </div>
       <div class="modal-actions">
         <button type="button" (click)="closeFormModal()">Cancelar</button>
@@ -71,9 +103,43 @@
   <!-- Modal Detalle Evento -->
   <div class="modal-backdrop" *ngIf="showDetalleModal" (click)="closeDetalleModal()"></div>
   <div class="modal-content modal-detalle" *ngIf="showDetalleModal">
-    <h2>{{ eventoDetalle?.titulo }}</h2>
+    <div class="modal-header">
+      <h2>{{ eventoDetalle?.titulo }}</h2>
+      <div class="sello-verificacion-modal" *ngIf="eventoDetalle?.verificado" title="Evento oficial verificado">
+        <span class="icono-verificacion">✓</span>
+        <span class="texto-verificacion">Oficial</span>
+      </div>
+    </div>
     <p class="evento-meta">{{ eventoDetalle?.fecha | date:'mediumDate' }} · {{ eventoDetalle?.lugar }}</p>
     <p>{{ eventoDetalle?.descripcion }}</p>
+    
+    <!-- Estadísticas de confirmación -->
+    <div class="estadisticas-confirmacion" *ngIf="eventoDetalle">
+      <div class="estadistica-item">
+        <span class="estadistica-numero">{{ getEstadisticasEvento(eventoDetalle.id).confirmados }}</span>
+        <span class="estadistica-label">Confirmados</span>
+      </div>
+      <div class="estadistica-item">
+        <span class="estadistica-numero">{{ getEstadisticasEvento(eventoDetalle.id).total }}</span>
+        <span class="estadistica-label">Total</span>
+      </div>
+    </div>
+    
+    <!-- Botón de confirmación en modal -->
+    <div class="modal-confirmacion" *ngIf="eventoDetalle">
+      <button 
+        class="btn-confirmar-asistencia-modal" 
+        [class.confirmado]="isAsistiendo(eventoDetalle)"
+        [class.loading]="confirmandoAsistencia"
+        (click)="toggleAsistencia(eventoDetalle)"
+        [disabled]="confirmandoAsistencia">
+        <span class="btn-text">
+          {{ isAsistiendo(eventoDetalle) ? '✓ Asistencia Confirmada' : 'Confirmar mi asistencia' }}
+        </span>
+        <span class="btn-loading" *ngIf="confirmandoAsistencia">...</span>
+      </button>
+    </div>
+    
     <div class="modal-actions">
       <button type="button" (click)="closeDetalleModal()">Cerrar</button>
     </div>
