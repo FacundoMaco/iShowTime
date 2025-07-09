@@ -114,10 +114,80 @@ h2 {
   border: none;
   cursor: pointer;
 }
-.btn-main:hover {
+.btn-main:hover:not(:disabled) {
   background: #1a252f;
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 6px 18px rgba(44, 62, 80, 0.13);
+}
+
+.btn-main:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+/* Mensaje de error */
+.error-message {
+  background: #fff5f5;
+  border: 1px solid #e74c3c;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.error-message span {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.error-close {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.error-close:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.loading-spinner::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .login-links {
