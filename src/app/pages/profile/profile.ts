@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService, UserProfile } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
+import { CommentsSectionComponent } from '../../features/comments/components/comments-section/comments-section.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CommentsSectionComponent],
   templateUrl: './profile.html',
   styleUrl: './profile.css'
 })

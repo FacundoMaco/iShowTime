@@ -1,0 +1,134 @@
+<div class="comments-container">
+  <div class="comments-header">
+    <h2>Comentarios del Perfil</h2>
+    <p class="comments-count">{{ comments.length }} comentarios</p>
+  </div>
+
+  <!-- Formulario para agregar comentario -->
+  <div class="comment-form-section">
+    <h3>Agregar un comentario</h3>
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="comment-form">
+      <div class="form-group">
+        <label for="content">Tu comentario:</label>
+        <textarea
+          id="content"
+          formControlName="content"
+          placeholder="Escribe tu comentario aquí..."
+          rows="4"
+          class="comment-textarea"
+        ></textarea>
+        <div class="error-message" *ngIf="commentForm.get('content')?.invalid && commentForm.get('content')?.touched">
+          <span *ngIf="commentForm.get('content')?.errors?.['required']">El comentario es requerido</span>
+          <span *ngIf="commentForm.get('content')?.errors?.['minlength']">El comentario debe tener al menos 10 caracteres</span>
+          <span *ngIf="commentForm.get('content')?.errors?.['maxlength']">El comentario no puede exceder 500 caracteres</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="rating">Calificación:</label>
+        <div class="rating-stars">
+          <button
+            type="button"
+            *ngFor="let star of getStars(5)"
+            [class.active]="star <= commentForm.get('rating')?.value"
+            (click)="commentForm.patchValue({rating: star})"
+            class="star-btn"
+          >
+            ★
+          </button>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="commentForm.invalid || isSubmitting"
+        class="submit-btn"
+      >
+        <span *ngIf="!isSubmitting">Publicar comentario</span>
+        <span *ngIf="isSubmitting">Publicando...</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- Lista de comentarios -->
+  <div class="comments-list">
+    <div *ngIf="comments.length === 0" class="no-comments">
+      <p>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+    </div>
+
+    <div *ngFor="let comment of comments" class="comment-item">
+      <div class="comment-header">
+        <div class="comment-user">
+          <img [src]="comment.userAvatar" [alt]="comment.userName" class="user-avatar">
+          <div class="user-info">
+            <h4 class="user-name">{{ comment.userName }}</h4>
+            <span class="comment-date">{{ formatDate(comment.createdAt) }}</span>
+            <span *ngIf="comment.isEdited" class="edited-badge">(editado)</span>
+          </div>
+        </div>
+        
+        <div class="comment-actions" *ngIf="canEditComment(comment) || canDeleteComment(comment)">
+          <button
+            *ngIf="canEditComment(comment)"
+            (click)="startEdit(comment)"
+            class="action-btn edit-btn"
+            [disabled]="editingCommentId === comment.id"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="m18.5 2.5 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            Editar
+          </button>
+          <button
+            *ngIf="canDeleteComment(comment)"
+            (click)="deleteComment(comment.id)"
+            class="action-btn delete-btn"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3,6 5,6 21,6"></polyline>
+              <path d="M19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+            </svg>
+            Eliminar
+          </button>
+        </div>
+      </div>
+
+      <!-- Rating -->
+      <div class="comment-rating" *ngIf="comment.rating">
+        <div class="stars-display">
+          <span
+            *ngFor="let star of getStars(5)"
+            [class.filled]="star <= comment.rating"
+            class="star"
+          >
+            ★
+          </span>
+        </div>
+        <span class="rating-text">{{ comment.rating }}/5</span>
+      </div>
+
+      <!-- Contenido del comentario -->
+      <div class="comment-content">
+        <div *ngIf="editingCommentId !== comment.id" class="comment-text">
+          {{ comment.content }}
+        </div>
+        
+        <!-- Formulario de edición -->
+        <div *ngIf="editingCommentId === comment.id" class="edit-form">
+          <form [formGroup]="editForm" (ngSubmit)="saveEdit()">
+            <textarea
+              formControlName="content"
+              rows="3"
+              class="edit-textarea"
+            ></textarea>
+            <div class="edit-actions">
+              <button type="button" (click)="cancelEdit()" class="cancel-btn">Cancelar</button>
+              <button type="submit" [disabled]="editForm.invalid" class="save-btn">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

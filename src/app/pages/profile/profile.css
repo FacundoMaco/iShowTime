@@ -305,6 +305,17 @@
   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
 }
 
+.action-btn.comments {
+  background: #28a745;
+  color: white;
+}
+
+.action-btn.comments:hover {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+
 .action-btn.secondary {
   background: transparent;
   color: var(--danger-color);

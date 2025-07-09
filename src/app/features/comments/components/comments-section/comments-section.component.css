@@ -1,0 +1,361 @@
+.comments-section {
+  margin-top: 20px;
+  border-top: 1px solid var(--border-color, #e9ecef);
+  padding-top: 20px;
+}
+
+.comments-toggle {
+  margin-bottom: 16px;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--text-color, #333);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+}
+
+.toggle-btn:hover {
+  color: var(--primary-color, #007bff);
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.chevron.rotated {
+  transform: rotate(180deg);
+}
+
+.comments-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.comments-content.show {
+  max-height: 1000px;
+}
+
+/* Formulario de comentarios */
+.comment-form-section {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color, #e9ecef);
+}
+
+.comment-form-section h4 {
+  margin: 0 0 12px 0;
+  color: var(--text-color, #333);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--text-color, #333);
+  font-size: 0.8rem;
+}
+
+.comment-textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color, #e9ecef);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.comment-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color, #007bff);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.75rem;
+}
+
+/* Rating stars */
+.rating-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.star-btn:hover,
+.star-btn.active {
+  color: #ffc107;
+}
+
+.submit-btn {
+  background: var(--primary-color, #007bff);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+  font-size: 0.8rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Lista de comentarios */
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.no-comments {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted, #666);
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed var(--border-color, #e9ecef);
+  font-size: 0.85rem;
+}
+
+.comment-item {
+  background: white;
+  border: 1px solid var(--border-color, #e9ecef);
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.comment-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color, #e9ecef);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-color, #333);
+}
+
+.comment-date {
+  font-size: 0.7rem;
+  color: var(--text-muted, #666);
+}
+
+.edited-badge {
+  font-size: 0.65rem;
+  color: var(--text-muted, #666);
+  font-style: italic;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: 1px solid var(--border-color, #e9ecef);
+  border-radius: 4px;
+  background: white;
+  color: var(--text-color, #333);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: #e3f2fd;
+  border-color: #2196f3;
+  color: #2196f3;
+}
+
+.delete-btn:hover {
+  background: #ffebee;
+  border-color: #f44336;
+  color: #f44336;
+}
+
+/* Rating display */
+.comment-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.stars-display {
+  display: flex;
+  gap: 1px;
+}
+
+.star {
+  font-size: 0.8rem;
+  color: #ddd;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.rating-text {
+  font-size: 0.7rem;
+  color: var(--text-muted, #666);
+  font-weight: 500;
+}
+
+/* Contenido del comentario */
+.comment-content {
+  margin-top: 8px;
+}
+
+.comment-text {
+  line-height: 1.4;
+  color: var(--text-color, #333);
+  font-size: 0.85rem;
+}
+
+/* Formulario de edición */
+.edit-form {
+  margin-top: 8px;
+}
+
+.edit-textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color, #e9ecef);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  resize: vertical;
+  margin-bottom: 8px;
+}
+
+.edit-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color, #007bff);
+}
+
+.edit-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.cancel-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--border-color, #e9ecef);
+  border-radius: 4px;
+  background: white;
+  color: var(--text-color, #333);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.75rem;
+}
+
+.cancel-btn:hover {
+  background: #f8f9fa;
+}
+
+.save-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background: var(--primary-color, #007bff);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.75rem;
+}
+
+.save-btn:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.save-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comment-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .comment-actions {
+    align-self: flex-end;
+  }
+  
+  .edit-actions {
+    flex-direction: column;
+  }
+} 
