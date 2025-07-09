@@ -5,20 +5,45 @@
     </div>
     <nav class="main-nav">
         <ul>
-            <li><a routerLink="/">Inicio</a></li>
-            <li><a href="#events">Eventos</a></li>
+            <li><a routerLink="/inicio">Inicio</a></li>
+            <li><a routerLink="/eventos">Eventos</a></li>
             <li><a routerLink="/nosotros">Nosotros</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li><a routerLink="/contacto">Contacto</a></li>
         </ul>
     </nav>
-    <div class="auth-buttons">
-        <app-notificaciones></app-notificaciones>
+<div class="auth-buttons" *ngIf="!user">
+    <app-notificaciones></app-notificaciones>
+    <a routerLink="/login" class="login-btn">Iniciar sesión</a>
+    <a routerLink="/register" class="register-btn">Crear Cuenta</a>
+</div>
         <a routerLink="/login" class="login-btn">Iniciar sesión</a>
         <a routerLink="/register" class="register-btn">Crear Cuenta</a>
+    </div>
+    
+    <!-- Mostrar menú de usuario si hay usuario logueado -->
+    <div class="user-avatar-menu" *ngIf="user">
+        <button class="user-avatar-btn" (click)="toggleUserMenu()">
+            <svg class="user-avatar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 20c0-2.5 3.5-4 8-4s8 1.5 8 4"/>
+            </svg>
+        </button>
+        
+        <div class="user-menu-dropdown" *ngIf="showUserMenu">
+            <button (click)="openConfigModal()">Configuración</button>
+            <button (click)="logout()">Cerrar Sesión</button>
+        </div>
     </div>
 </header>
 
 <router-outlet></router-outlet>
+
+<!-- Modal de configuración de usuario -->
+<app-user-config-modal 
+    *ngIf="showConfigModal" 
+    [user]="user" 
+    (close)="closeConfigModal($event)">
+</app-user-config-modal>
 
 <footer class="site-footer-bottom">
     <div class="footer-links">
