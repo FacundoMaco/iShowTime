@@ -29,9 +29,10 @@ export class Login {
     this.error = '';
 
     // Simular proceso de autenticación
+    // Aquí iría la lógica de autenticación real
+    // Por ahora, redirigir al inicio
     setTimeout(() => {
       try {
-        // Aquí iría la lógica de autenticación real
         console.log('Login attempt:', { correo: this.correo, password: this.password });
         
         // Por ahora, redirigir al inicio
