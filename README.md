@@ -1,6 +1,8 @@
 ShowTime 🎟️  
 **Una plataforma web para centralizar y potenciar la vida estudiantil a través de eventos universitarios**
 
+---
+
 ## 🌟 Descripción del Proyecto
 
 **ShowTime** es una innovadora plataforma web desarrollada por estudiantes de la Universidad Peruana de Ciencias Aplicadas (UPC). Tiene como objetivo centralizar la gestión, difusión y participación en eventos académicos, culturales y recreativos dentro del entorno universitario. ShowTime permite a los usuarios explorar eventos según sus intereses, registrarse de forma intuitiva, y a los organizadores, gestionar sus actividades con herramientas específicas.
