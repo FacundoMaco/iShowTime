@@ -167,4 +167,8 @@ export class Events {
   closeEventDetails(): void {
     this.selectedEvent = undefined;
   }
+
+  showMiniSearchAlert(): void {
+    alert('Búsqueda simple');
+  }
 } 
