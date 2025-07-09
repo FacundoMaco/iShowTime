@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { EventosService, Evento } from '../../eventos.service';
 import { UserService } from '../../user.service';
+import { Subject, takeUntil } from 'rxjs';
 
 interface EventoLocal {
   id: number;
@@ -20,9 +21,17 @@ interface EventoLocal {
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   templateUrl: './eventos.component.html',
-  styleUrls: ['./eventos.component.css']
+  styleUrls: ['./eventos.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventosComponent {
+export class EventosComponent implements OnDestroy {
+  private destroy$ = new Subject<void>();
+  
+  // Cache para operaciones costosas
+  private _eventosVerificadosCache: EventoLocal[] | null = null;
+  private _eventosNoVerificadosCache: EventoLocal[] | null = null;
+  private _eventosAsistidosCache: Set<number> = new Set();
+
   eventos: EventoLocal[] = [
     { id: 1, titulo: 'Feria Universitaria', fecha: '2024-07-10', lugar: 'Auditorio Central', descripcion: 'Una feria para conocer las actividades universitarias.', verificado: true },
     { id: 2, titulo: 'Hackathon 2024', fecha: '2024-08-05', lugar: 'Sala de Innovación', descripcion: 'Competencia de programación y tecnología.', verificado: true },
@@ -43,7 +52,8 @@ export class EventosComponent {
   constructor(
     private fb: FormBuilder,
     private eventosService: EventosService,
-    private userService: UserService
+    private userService: UserService,
+    private cdr: ChangeDetectorRef
   ) {
     this.eventoForm = this.fb.group({
       titulo: ['', [Validators.required, Validators.maxLength(40)]],
@@ -53,10 +63,25 @@ export class EventosComponent {
     });
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  // TrackBy functions para optimizar ngFor
+  trackByEventoId(index: number, evento: EventoLocal): number {
+    return evento.id;
+  }
+
+  trackByEventoAsistidoId(index: number, evento: EventoLocal): number {
+    return evento.id;
+  }
+
   openCreateModal() {
     this.editando = false;
     this.eventoForm.reset();
     this.showFormModal = true;
+    this.cdr.markForCheck();
   }
 
   openEditModal(evento: Evento) {
@@ -69,11 +94,13 @@ export class EventosComponent {
       descripcion: evento.descripcion
     });
     this.showFormModal = true;
+    this.cdr.markForCheck();
   }
 
   closeFormModal() {
     this.showFormModal = false;
     this.eventoEditando = null;
+    this.cdr.markForCheck();
   }
 
   guardarEvento() {
@@ -85,13 +112,17 @@ export class EventosComponent {
       this.eventoEditando.fecha = formValue.fecha;
       this.eventoEditando.lugar = formValue.lugar;
       this.eventoEditando.descripcion = formValue.descripcion;
+      // Invalidar cache
+      this.invalidarCache();
     } else {
       // Crear nuevo evento
       const nuevoEvento: Evento = {
         id: Date.now(),
         ...formValue
       };
-      this.eventos.push(nuevoEvento);
+      this.eventos = [...this.eventos, nuevoEvento];
+      // Invalidar cache
+      this.invalidarCache();
     }
     this.closeFormModal();
   }
@@ -99,19 +130,27 @@ export class EventosComponent {
   eliminarEvento(evento: Evento) {
     this.eventos = this.eventos.filter(e => e.id !== evento.id);
     this.eventosAsistidos = this.eventosAsistidos.filter(e => e.id !== evento.id);
+    this._eventosAsistidosCache.delete(evento.id);
+    
     if (this.eventoDetalle && this.eventoDetalle.id === evento.id) {
       this.closeDetalleModal();
     }
+    
+    // Invalidar cache
+    this.invalidarCache();
+    this.cdr.markForCheck();
   }
 
   openDetalleModal(evento: Evento) {
     this.eventoDetalle = evento;
     this.showDetalleModal = true;
+    this.cdr.markForCheck();
   }
 
   closeDetalleModal() {
     this.showDetalleModal = false;
     this.eventoDetalle = null;
+    this.cdr.markForCheck();
   }
 
   async confirmarAsistencia(evento: EventoLocal) {
@@ -122,10 +161,13 @@ export class EventosComponent {
     }
 
     this.confirmandoAsistencia = true;
+    this.cdr.markForCheck();
+    
     try {
       const resultado = await this.eventosService.confirmarAsistencia(evento.id, user.id).toPromise();
       if (resultado) {
-        this.eventosAsistidos.push(evento);
+        this.eventosAsistidos = [...this.eventosAsistidos, evento];
+        this._eventosAsistidosCache.add(evento.id);
         this.mostrarMensajeConfirmacion('¡Asistencia confirmada exitosamente!');
       }
     } catch (error) {
@@ -133,6 +175,7 @@ export class EventosComponent {
       this.mostrarMensajeConfirmacion('Error al confirmar asistencia. Inténtalo de nuevo.');
     } finally {
       this.confirmandoAsistencia = false;
+      this.cdr.markForCheck();
     }
   }
 
@@ -144,10 +187,13 @@ export class EventosComponent {
     }
 
     this.confirmandoAsistencia = true;
+    this.cdr.markForCheck();
+    
     try {
       const resultado = await this.eventosService.cancelarAsistencia(evento.id, user.id).toPromise();
       if (resultado) {
         this.eventosAsistidos = this.eventosAsistidos.filter(e => e.id !== evento.id);
+        this._eventosAsistidosCache.delete(evento.id);
         this.mostrarMensajeConfirmacion('Asistencia cancelada exitosamente');
       }
     } catch (error) {
@@ -155,6 +201,7 @@ export class EventosComponent {
       this.mostrarMensajeConfirmacion('Error al cancelar asistencia. Inténtalo de nuevo.');
     } finally {
       this.confirmandoAsistencia = false;
+      this.cdr.markForCheck();
     }
   }
 
@@ -167,32 +214,46 @@ export class EventosComponent {
   }
 
   isAsistiendo(evento: EventoLocal): boolean {
-    return this.eventosAsistidos.some(e => e.id === evento.id);
+    return this._eventosAsistidosCache.has(evento.id);
   }
 
   getEstadisticasEvento(eventoId: number) {
     return this.eventosService.getEstadisticasEvento(eventoId);
   }
 
-  // Métodos para manejo de verificación
+  // Métodos optimizados para manejo de verificación
   isEventoVerificado(evento: EventoLocal): boolean {
     return evento.verificado === true;
   }
 
   getEventosVerificados(): EventoLocal[] {
-    return this.eventos.filter(evento => evento.verificado);
+    if (this._eventosVerificadosCache === null) {
+      this._eventosVerificadosCache = this.eventos.filter(evento => evento.verificado);
+    }
+    return this._eventosVerificadosCache;
   }
 
   getEventosNoVerificados(): EventoLocal[] {
-    return this.eventos.filter(evento => !evento.verificado);
+    if (this._eventosNoVerificadosCache === null) {
+      this._eventosNoVerificadosCache = this.eventos.filter(evento => !evento.verificado);
+    }
+    return this._eventosNoVerificadosCache;
   }
 
   toggleVerificacion(evento: EventoLocal) {
     // Solo para demostración - en producción esto sería manejado por admin
     evento.verificado = !evento.verificado;
+    this.invalidarCache();
     this.mostrarMensajeConfirmacion(
       evento.verificado ? 'Evento marcado como verificado' : 'Verificación removida del evento'
     );
+    this.cdr.markForCheck();
+  }
+
+  // Método para invalidar cache cuando los datos cambian
+  private invalidarCache() {
+    this._eventosVerificadosCache = null;
+    this._eventosNoVerificadosCache = null;
   }
 
   private mostrarMensajeConfirmacion(mensaje: string) {
@@ -204,24 +265,35 @@ export class EventosComponent {
       position: fixed;
       top: 20px;
       right: 20px;
-      background: #2c3e50;
+      background: #28a745;
       color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      z-index: 3000;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      animation: slideIn 0.3s ease-out;
+      padding: 15px 20px;
+      border-radius: 5px;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      animation: slideIn 0.3s ease;
     `;
-    
+
+    // Agregar estilos de animación
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
+
     document.body.appendChild(mensajeElement);
-    
+
+    // Remover el mensaje después de 3 segundos
     setTimeout(() => {
-      mensajeElement.style.animation = 'slideOut 0.3s ease-in';
-      setTimeout(() => {
-        document.body.removeChild(mensajeElement);
-      }, 300);
+      if (mensajeElement.parentNode) {
+        mensajeElement.parentNode.removeChild(mensajeElement);
+      }
+      if (style.parentNode) {
+        style.parentNode.removeChild(style);
+      }
     }, 3000);
   }
 } 
