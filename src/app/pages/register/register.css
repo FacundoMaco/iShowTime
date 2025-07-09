@@ -120,6 +120,83 @@ button[type="submit"]:disabled {
   cursor: not-allowed;
 }
 
+/* Contenedor de errores */
+.errores-container {
+  background: #fff5f5;
+  border: 1px solid #e74c3c;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.errores-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.errores-header span {
+  color: #e74c3c;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.cerrar-errores {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.cerrar-errores:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.errores-lista {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.errores-lista li {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-bottom: 0.3rem;
+}
+
+/* Loading text */
+.loading-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.loading-text::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .divider {
   text-align: center;
   color: #888;

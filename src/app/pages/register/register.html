@@ -17,11 +17,26 @@
       <input type="email" name="email" [(ngModel)]="email" placeholder="tu@gmail.com" required />
       <input type="password" name="password" [(ngModel)]="password" placeholder="contraseña" required />
       <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" placeholder="contraseña" required />
+      <!-- Mensajes de error -->
+      <div class="errores-container" *ngIf="errores.length > 0">
+        <div class="errores-header">
+          <span>Por favor corrige los siguientes errores:</span>
+          <button type="button" class="cerrar-errores" (click)="limpiarErrores()">×</button>
+        </div>
+        <ul class="errores-lista">
+          <li *ngFor="let error of errores">{{ error }}</li>
+        </ul>
+      </div>
+
       <div class="checkbox-row">
         <input type="checkbox" name="terminos" [(ngModel)]="terminos" required />
         <label for="terminos">Acepto los términos y condiciones</label>
       </div>
-      <button type="submit" [disabled]="!registerForm.form.valid">Crear Cuenta</button>
+      
+      <button type="submit" [disabled]="loading">
+        <span *ngIf="!loading">Crear Cuenta</span>
+        <span *ngIf="loading" class="loading-text">Creando cuenta...</span>
+      </button>
       <div class="divider">O regístrate con</div>
       <div class="social-row">
         <button type="button" class="facebook-btn">Facebook</button>
