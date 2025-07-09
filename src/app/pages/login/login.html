@@ -26,7 +26,16 @@
         </span>
       </div>
     </div>
-    <button type="submit" class="btn-main">Entrar</button>
+    <!-- Mensaje de error -->
+    <div class="error-message" *ngIf="error">
+      <span>{{ error }}</span>
+      <button type="button" class="error-close" (click)="clearError()">×</button>
+    </div>
+
+    <button type="submit" class="btn-main" [disabled]="loading">
+      <span *ngIf="!loading">Entrar</span>
+      <span *ngIf="loading" class="loading-spinner">Iniciando sesión...</span>
+    </button>
     <div class="login-links">
       <span>¿No tienes cuenta? <a routerLink="/register">Regístrate</a></span>
     </div>
