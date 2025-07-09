@@ -47,7 +47,7 @@
         <i class="fas fa-user"></i> <span>Organizador: {{ event.organizer }}</span>
       </div>
       <div class="event-actions">
-        <button class="details-btn" (click)="openEventDetails(event)">Ver detalles</button>
+        <button class="details-btn" (click)="showEventDetail(event)">Ver detalle</button>
         <button class="save-btn" (click)="attendEvent(event.id)">Guardar</button>
         <button class="attend-btn" (click)="attendEvent(event.id)">Asistiré</button>
       </div>

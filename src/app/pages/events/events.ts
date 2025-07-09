@@ -171,4 +171,8 @@ export class Events {
   showMiniSearchAlert(): void {
     alert('Búsqueda simple');
   }
+
+  showEventDetail(event: any): void {
+    alert(`Evento: ${event.title}\nFecha: ${event.date}\nOrganizador: ${event.organizer || 'N/A'}`);
+  }
 } 
