@@ -32,9 +32,9 @@
             </span>
             <span class="btn-loading" *ngIf="confirmandoAsistencia">...</span>
           </button>
-          <button class="btn-link" (click)="openEditModal(evento)">Editar</button>
-          <button class="btn-link btn-danger" (click)="eliminarEvento(evento)">Eliminar</button>
-          <button class="btn-link" (click)="openDetalleModal(evento)">Ver detalles</button>
+          <button class="btn-link" (click)="openEditModal(evento)" title="Editar información del evento">Editar</button>
+          <button class="btn-link btn-danger" (click)="eliminarEvento(evento)" title="Eliminar evento permanentemente">Eliminar</button>
+          <button class="btn-link" (click)="openDetalleModal(evento)" title="Ver información completa del evento">Ver detalles</button>
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@
             <span class="btn-text">✓ Confirmado</span>
             <span class="btn-loading" *ngIf="confirmandoAsistencia">...</span>
           </button>
-          <button class="btn-link" (click)="openDetalleModal(evento)">Ver detalles</button>
+          <button class="btn-link" (click)="openDetalleModal(evento)" title="Ver información completa del evento">Ver detalles</button>
         </div>
       </div>
     </div>
@@ -75,19 +75,23 @@
     <form [formGroup]="eventoForm" (ngSubmit)="guardarEvento()">
       <div class="form-group">
         <label for="titulo">Título</label>
-        <input id="titulo" formControlName="titulo" maxlength="40" required />
+        <input id="titulo" formControlName="titulo" maxlength="40" required 
+               title="Nombre del evento (máximo 40 caracteres)" />
       </div>
       <div class="form-group">
         <label for="fecha">Fecha</label>
-        <input id="fecha" type="date" formControlName="fecha" required />
+        <input id="fecha" type="date" formControlName="fecha" required 
+               title="Fecha y hora del evento" />
       </div>
       <div class="form-group">
         <label for="lugar">Lugar</label>
-        <input id="lugar" formControlName="lugar" maxlength="40" required />
+        <input id="lugar" formControlName="lugar" maxlength="40" required 
+               title="Ubicación donde se realizará el evento" />
       </div>
       <div class="form-group">
         <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" formControlName="descripcion" maxlength="200" rows="3" placeholder="Breve descripción"></textarea>
+        <textarea id="descripcion" formControlName="descripcion" maxlength="200" rows="3" 
+                  placeholder="Breve descripción" title="Descripción detallada del evento (máximo 200 caracteres)"></textarea>
       </div>
       <div class="modal-actions">
         <button type="button" (click)="closeFormModal()">Cancelar</button>

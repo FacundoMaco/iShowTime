@@ -3,7 +3,8 @@
   <button 
     class="btn-notificaciones" 
     (click)="togglePanel()"
-    [class.tiene-notificaciones]="contadorNoLeidas > 0">
+    [class.tiene-notificaciones]="contadorNoLeidas > 0"
+    [title]="contadorNoLeidas > 0 ? contadorNoLeidas + ' notificaciones sin leer' : 'Ver notificaciones'">
     <span class="icono-notificacion">🔔</span>
     <span class="contador-notificaciones" *ngIf="contadorNoLeidas > 0">
       {{ contadorNoLeidas > 99 ? '99+' : contadorNoLeidas }}
@@ -100,12 +101,14 @@
         <button 
           class="btn-marcar-todas" 
           *ngIf="contadorNoLeidas > 0"
-          (click)="marcarTodasComoLeidas()">
+          (click)="marcarTodasComoLeidas()"
+          title="Marcar todas las notificaciones como leídas">
           Marcar todas como leídas
         </button>
         <button 
           class="btn-solicitar-permisos"
-          (click)="solicitarPermisosNotificacion()">
+          (click)="solicitarPermisosNotificacion()"
+          title="Solicitar permisos para notificaciones del navegador">
           Activar notificaciones del navegador
         </button>
       </div>
