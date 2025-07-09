@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
 import { Inicio } from './pages/inicio/inicio';
-import { Nosotros } from './pages/nosotros/nosotros';
-import { Contacto } from './pages/contacto/contacto';
+import { NosotrosComponent } from './pages/nosotros/nosotros.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
 import { EventosComponent } from './pages/eventos/eventos.component';
 
 export const routes: Routes = [
@@ -11,7 +11,7 @@ export const routes: Routes = [
     { path: 'inicio', component: Inicio },
     { path: 'login', component: Login },
     { path: 'register', component: Register },
-    { path: 'nosotros', component: Nosotros },
-    { path: 'contacto', component: Contacto },
+    { path: 'nosotros', component: NosotrosComponent },
+    { path: 'contacto', component: ContactoComponent },
     { path: 'eventos', component: EventosComponent }
 ];
