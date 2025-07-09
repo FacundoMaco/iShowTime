@@ -11,6 +11,13 @@
             <li><a routerLink="/contacto">Contacto</a></li>
         </ul>
     </nav>
+    <app-notificaciones></app-notificaciones>
+    <!-- Mostrar botones de auth si no hay usuario logueado -->
+    <div class="auth-buttons" *ngIf="!user">
+        <a routerLink="/login" class="login-btn">Iniciar sesión</a>
+        <a routerLink="/register" class="register-btn">Crear Cuenta</a>
+    </div>
+=======
 <div class="auth-buttons" *ngIf="!user">
     <app-notificaciones></app-notificaciones>
     <a routerLink="/login" class="login-btn">Iniciar sesión</a>
